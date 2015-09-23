@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: 2015 年 9 月 14 日 23:48
+-- Generation Time: 2015 年 9 月 18 日 22:27
 -- サーバのバージョン： 5.5.42-log
 -- PHP Version: 5.6.10
 
@@ -37,7 +37,8 @@ CREATE TABLE `phinxlog` (
 --
 
 INSERT INTO `phinxlog` (`version`, `start_time`, `end_time`) VALUES
-(20150912080418, '2015-09-14 05:41:41', '2015-09-14 05:41:41');
+(20150912080418, '2015-09-14 05:41:41', '2015-09-14 05:41:41'),
+(20150918131254, '2015-09-18 04:23:49', '2015-09-18 04:23:49');
 
 -- --------------------------------------------------------
 
@@ -63,7 +64,7 @@ CREATE TABLE `threads` (
 --
 ALTER TABLE `threads`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `actor_id` (`actor_id`);
+  ADD KEY `actor_id` (`actor_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
