@@ -19,7 +19,7 @@ class Threads extends AbstractMigration
             ->addColumn('title','string')
             ->addColumn('body','text')
             ->addTimestamps() // created_at、updated_atを作る
-            ->addIndex(array('actor_id'),array('unique' => true))
+            ->addIndex('actor_id')
             ->create();
 
     }
