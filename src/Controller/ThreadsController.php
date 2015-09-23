@@ -19,7 +19,7 @@ class ThreadsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Actors']
+            //'contain' => ['Actors'] // あとで必要になるはず
         ];
         $this->set('threads', $this->paginate($this->Threads));
         $this->set('_serialize', ['threads']);
@@ -35,7 +35,7 @@ class ThreadsController extends AppController
     public function view($id = null)
     {
         $thread = $this->Threads->get($id, [
-            'contain' => ['Actors']
+            // 'contain' => ['Actors']
         ]);
         $this->set('thread', $thread);
         $this->set('_serialize', ['thread']);
@@ -58,8 +58,9 @@ class ThreadsController extends AppController
                 $this->Flash->error(__('The thread could not be saved. Please, try again.'));
             }
         }
-        $actors = $this->Threads->Actors->find('list', ['limit' => 200]);
-        $this->set(compact('thread', 'actors'));
+        $this->set(compact('thread'));
+        // $actors = $this->Threads->Actors->find('list', ['limit' => 200]);
+        // $this->set(compact('thread', 'actors'));
         $this->set('_serialize', ['thread']);
     }
 
@@ -84,8 +85,9 @@ class ThreadsController extends AppController
                 $this->Flash->error(__('The thread could not be saved. Please, try again.'));
             }
         }
-        $actors = $this->Threads->Actors->find('list', ['limit' => 200]);
-        $this->set(compact('thread', 'actors'));
+        $this->set(compact('thread'));
+        // $actors = $this->Threads->Actors->find('list', ['limit' => 200]);
+        // $this->set(compact('thread', 'actors'));
         $this->set('_serialize', ['thread']);
     }
 
