@@ -4,7 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ef2254b87b67630e4f4e3b4655ece177",
+    "hash": "cb3c3e7d133248fa4d7e6c132043be8e",
+    "content-hash": "d0da2f84a3dd5069a45e8ce7bfde0d4d",
     "packages": [
         {
             "name": "aura/installer-default",
@@ -289,6 +290,55 @@
             ],
             "description": "A composer installer for CakePHP 3.0+ plugins.",
             "time": "2015-06-10 10:35:13"
+        },
+        {
+            "name": "friendsofcake/bootstrap-ui",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfCake/bootstrap-ui.git",
+                "reference": "2e91156f10756f646cab2ee3e1d5d37e5c638026"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfCake/bootstrap-ui/zipball/2e91156f10756f646cab2ee3e1d5d37e5c638026",
+                "reference": "2e91156f10756f646cab2ee3e1d5d37e5c638026",
+                "shasum": ""
+            },
+            "require-dev": {
+                "cakephp/cakephp": "~3.0",
+                "cakephp/cakephp-codesniffer": "2.*",
+                "phpunit/phpunit": "4.1.*"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "BootstrapUI\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jad Bitar",
+                    "homepage": "http://jadb.io",
+                    "role": "Author"
+                },
+                {
+                    "name": "Others",
+                    "homepage": "https://github.com/friendsofcake/bootstrap-ui/graphs/contributors"
+                }
+            ],
+            "description": "Twitter Bootstrap 3 support for CakePHP 3",
+            "homepage": "http://github.com/friendsofcake/bootstrap-ui",
+            "keywords": [
+                "bootstrap",
+                "cakephp",
+                "twitter"
+            ],
+            "time": "2015-09-14 13:54:17"
         },
         {
             "name": "ircmaxell/password-compat",
@@ -1196,6 +1246,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "friendsofcake/bootstrap-ui": 20,
         "psy/psysh": 0
     },
     "prefer-stable": true,
