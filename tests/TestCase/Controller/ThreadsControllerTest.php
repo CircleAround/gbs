@@ -17,7 +17,7 @@ class ThreadsControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.threads',
-        'app.actors'
+        // 'app.actors'
     ];
 
     /**
