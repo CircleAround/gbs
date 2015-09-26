@@ -1,3 +1,5 @@
+<?= $this->Html->css(['bootstrap/bootstrap.min', 'bootstrap/styles']) ?>
+<?= $this->Html->script(['jquery/jquery', 'bootstrap/bootstrap.min']) ?>
 <div class="actions columns large-2 medium-3">
     <h3><?= __('Actions') ?></h3>
     <ul class="side-nav">
