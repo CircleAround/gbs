@@ -39,8 +39,20 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <span><?= $this->fetch('title') ?></span>
         </div>
         <div class="header-help">
-            <span><a target="_blank" href="http://book.cakephp.org/3.0/">Documentation</a></span>
-            <span><a target="_blank" href="http://api.cakephp.org/3.0/">API</a></span>
+            <span><a target="_blank" href="">新規</a></span>
+            <span><a target="_blank" href="">ログイン</a></span>
+            <span><a target="_blank" href="">ヘルプ</a></span>
+        </div>
+        <div class="header-menu">
+            <div id="hlogo">
+                <?= $this->Html->image('http://cakephp.org/img/cake-logo.png') ?>
+            </div>
+            <div id="hmenu">
+                <ui>
+                    <li><a id="question" href="">質問</a>
+                    </li>
+                </ui>
+            </div>
         </div>
     </header>
     <div id="container">
