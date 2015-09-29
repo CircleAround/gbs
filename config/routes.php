@@ -73,6 +73,9 @@ Router::scope('/', function ($routes) {
     $routes->fallbacks('InflectedRoute');
 });
 
+// githubでoauth認証
+Router::connect('/oauth/github', ['controller' => 'oauth', 'action' => 'github']);
+
 /**
  * Load all plugin routes.  See the Plugin documentation on
  * how to customize the loading of plugin routes.
