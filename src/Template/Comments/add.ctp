@@ -11,7 +11,8 @@
     <fieldset>
         <legend><?= __('Add Comment') ?></legend>
         <?php
-            echo $this->Form->input('thread_id', ['options' => $threads]);
+//            echo $this->Form->input('thread_id', ['options' => $threads]);
+            echo $this->Form->input('thread_id');
             echo $this->Form->input('actor_id');
             echo $this->Form->input('body');
             echo $this->Form->input('created_at');

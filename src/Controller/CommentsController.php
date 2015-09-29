@@ -20,9 +20,10 @@ class CommentsController extends AppController
     {
         $this->paginate = [
 //            'contain' => ['Threads', 'Actors']
+            'contain' => ['Threads']
         ];
         $this->set('comments', $this->paginate($this->Comments));
-        $this->set('_serialize', ['comments']);
+//        $this->set('_serialize', ['comments']);
     }
 
     /**
@@ -60,8 +61,8 @@ class CommentsController extends AppController
         }
         $threads = $this->Comments->Threads->find('list', ['limit' => 200]);
 //        $actors = $this->Comments->Actors->find('list', ['limit' => 200]);
-//        $this->set(compact('comment', 'threads', 'actors'));
-        $this->set('_serialize', ['comment']);
+        $this->set(compact('comment', 'threads'));
+//        $this->set('_serialize', ['comment']);
     }
 
     /**
@@ -74,7 +75,7 @@ class CommentsController extends AppController
     public function edit($id = null)
     {
         $comment = $this->Comments->get($id, [
-//            'contain' => []
+ //           'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $comment = $this->Comments->patchEntity($comment, $this->request->data);
@@ -88,8 +89,8 @@ class CommentsController extends AppController
         $threads = $this->Comments->Threads->find('list', ['limit' => 200]);
   //      $actors = $this->Comments->Actors->find('list', ['limit' => 200]);
   //      $this->set(compact('comment', 'threads', 'actors'));
-        $this->set('comment', $comment);
-        $this->set('_serialize', ['comment']);
+        $this->set(compact('threads', 'comment'));
+ //       $this->set('_serialize', ['comment']);
 
     }
 
