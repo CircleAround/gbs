@@ -36,6 +36,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 <body>
     <header>
         <div class="header-title">
+            <?= $this->Html->image('http://cakephp.org/img/cake-logo.png', ['id' => 'hlogo', 'width' => 50, 'height' => 50]) ?>
             <span><?= $this->fetch('title') ?></span>
         </div>
         <div class="header-help">
@@ -44,9 +45,6 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <span><a target="_blank" href="">ヘルプ</a></span>
         </div>
         <div class="header-menu">
-            <div id="hlogo">
-                <?= $this->Html->image('http://cakephp.org/img/cake-logo.png') ?>
-            </div>
             <div id="hmenu">
                 <ui>
                     <li><a id="question" href="">質問</a>
