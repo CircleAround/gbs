@@ -18,7 +18,7 @@ class ThreadsTableTest extends TestCase
      */
     public $fixtures = [
         'app.threads',
-        'app.actors'
+        // 'app.actors'
     ];
 
     /**
