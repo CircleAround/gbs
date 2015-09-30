@@ -15,9 +15,9 @@ class OauthController extends AppController
     public function github()
     {
         $provider = new \League\OAuth2\Client\Provider\Github([
-            'clientId'          => 'b389c9e0f62d9854b799',
-            'clientSecret'      => 'c06a1f9a0a7f16549869e01760f516cf18fd8479',
-            'redirectUri'       => 'http://localhost:8888/oauth/github',
+            'clientId'          => env('GITHUB_CLIENT_ID'),
+            'clientSecret'      => env('GITHUB_CLIENT_SECRET'),
+            'redirectUri'       => env('GITHUB_REDIRECT_URI'),
         ]);
 
         if (!isset($this->request->query['code'])) {
