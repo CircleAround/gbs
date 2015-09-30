@@ -26,11 +26,34 @@
             <h6 class="subheader"><?= __('Updated At') ?></h6>
             <p><?= h($thread->updated_at) ?></p>
         </div>
-    </div>
+    </div> 
     <div class="row texts">
         <div class="columns large-9">
-            <h6 class="subheader"><?= __('Body') ?></h6>
+<!--            <h6 class="subheader"><?= __('Body') ?></h6> -->
             <?= $this->Text->autoParagraph(h($thread->body)) ?>
         </div>
     </div>
+
+
+
+ <div class="comments index large-10 medium-9 columns">
+    <table cellpadding="0" cellspacing="0">
+    <thead>コメント一覧</thead>
+    <tbody>
+    <?php foreach ($thread->comments as $comment): ?>
+        <tr>
+            <td><?= h($comment->body) ?></td>
+            <td><?= h($comment->created_at) ?></td>
+            <td class="actions">
+                <?= $this->Html->link(__('View'), ['controller' => 'Comments','action' => 'view', $comment->id]) ?>
+                <?= $this->Html->link(__('Edit'), ['controller' => 'Comments','action' => 'edit', $comment->id]) ?>
+                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Comments','action' => 'delete', $comment->id], ['confirm' => __('Are you sure you want to delete # {0}?', $comment->id)]) ?>
+            </td>
+        </tr>
+
+    <?php endforeach; ?>
+    </tbody>
+    </table>
+</div>
+
 </div>

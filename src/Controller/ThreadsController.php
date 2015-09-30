@@ -34,11 +34,20 @@ class ThreadsController extends AppController
      */
     public function view($id = null)
     {
-        $thread = $this->Threads->get($id, [
+//        $thread = $this->Threads->get($id, [
             // 'contain' => ['Actors']
-        ]);
+//        ]);
+        $thread = $this->Threads->find('all')
+        ->contain(['Comments'])->where(['id'=>$id])->first();
+
         $this->set('thread', $thread);
         $this->set('_serialize', ['thread']);
+
+        $comment_entity = $this->Threads->Comments
+        ->newEntity($this->request->data);
+
+        $this->set('Comment_entity', $comment_entity);
+
     }
 
     /**

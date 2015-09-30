@@ -1,18 +1,19 @@
 <?php
 namespace App\Model\Table;
 
-use App\Model\Entity\Thread;
+use App\Model\Entity\Comment;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Threads Model
+ * Comments Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $Threads
  * @property \Cake\ORM\Association\BelongsTo $Actors
  */
-class ThreadsTable extends Table
+class CommentsTable extends Table
 {
 
     /**
@@ -25,20 +26,18 @@ class ThreadsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('threads');
-        $this->displayField('title');
+        $this->table('comments');
+        $this->displayField('id');
         $this->primaryKey('id');
 
+        $this->belongsTo('Threads', [
+            'foreignKey' => 'thread_id',
+            'joinType' => 'INNER'
+        ]);
         $this->belongsTo('Actors', [
             'foreignKey' => 'actor_id',
             'joinType' => 'INNER'
         ]);
-
-        $this->hasMany('Comments', [
-            'foreignKey' => 'thread_id',
-        ]);
-
-
     }
 
     /**
@@ -52,10 +51,6 @@ class ThreadsTable extends Table
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('id', 'create');
-
-        $validator
-            ->requirePresence('title', 'create')
-            ->notEmpty('title');
 
         $validator
             ->requirePresence('body', 'create')
@@ -80,6 +75,7 @@ class ThreadsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
+        $rules->add($rules->existsIn(['thread_id'], 'Threads'));
         $rules->add($rules->existsIn(['actor_id'], 'Actors'));
         return $rules;
     }
