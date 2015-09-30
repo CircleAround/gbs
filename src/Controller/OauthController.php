@@ -63,7 +63,7 @@ class OauthController extends AppController
                     $query
                         ->insert(['name', 'uid', 'nickname', 'avator', 'access_token'])
                         ->values([
-                            'name' => $user->getName(),
+                            'name' => (empty($user->getName())) ? $user->getNickname() : $user->getName(),
                             'uid' => $user->getId(),
                             'nickname' => $user->getNickname(),
                             'avator' => $user_to_array['avatar_url'],
