@@ -188,6 +188,10 @@ if (Configure::read('debug')) {
     Plugin::load('DebugKit', ['bootstrap' => true]);
 }
 
+$Loader = (new \josegonzalez\Dotenv\Loader(ROOT . DS . '.env'))
+              ->parse()
+              ->toEnv();
+
 /**
  * Connect middleware/dispatcher filters.
  */
