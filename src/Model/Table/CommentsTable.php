@@ -35,6 +35,7 @@ class CommentsTable extends Table
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Actors', [
+            'className' => 'Users',
             'foreignKey' => 'actor_id',
             'joinType' => 'INNER'
         ]);

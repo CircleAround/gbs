@@ -28,6 +28,13 @@ class UsersTable extends Table
         $this->displayField('name');
         $this->primaryKey('id');
 
+        $this->hasMany('Threads', [
+            'foreignKey' => 'actor_id'
+        ]);
+        $this->hasMany('Comments', [
+            'foreignKey' => 'actor_id'
+        ]);
+
     }
 
     /**

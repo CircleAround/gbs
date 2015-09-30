@@ -30,6 +30,7 @@ class ThreadsTable extends Table
         $this->primaryKey('id');
 
         $this->belongsTo('Actors', [
+            'className' => 'Users',
             'foreignKey' => 'actor_id',
             'joinType' => 'INNER'
         ]);
