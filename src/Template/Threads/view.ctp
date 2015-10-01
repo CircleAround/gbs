@@ -37,8 +37,17 @@
 
 
  <div class="comments index large-10 medium-9 columns">
+    <h3>Comment</h3>
+    <?php
+        echo $this->Form->create($comment,['action'=>'comment_add']);
+        echo $this->Form->input('body');
+        echo $this->Form->button(__('Submit'));
+        echo $this->Form->hidden('thread_id',array('value'=>$thread->id));
+        echo $this->Form->end();        
+    ?>
+
     <table cellpadding="0" cellspacing="0">
-    <thead>コメント一覧</thead>
+<!--    <thead>コメント一覧</thead> -->
     <tbody>
     <?php foreach ($thread->comments as $comment): ?>
         <tr>
