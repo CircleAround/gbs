@@ -44,16 +44,18 @@ class ThreadsController extends AppController
         $this->set('_serialize', ['thread']);
 
         $comment = $this->Threads->Comments
-        ->newEntity($this->request->data);
+        ->newEntity();
 
         $this->set('comment', $comment);
 
     }
+
+/*
      public function comment_add() {
         $comment = $this->Threads->Comments
             ->newEntity($this->request->data);
         if ($this->request->is('post')) {
-            $comment->created_at = new \DateTime();
+//            $comment->created_at = new \DateTime();
             if ($this->Threads->Comments->save($comment)) {
                 $this->Flash->success(__('The comment has been saved.'));
             }else{
@@ -62,7 +64,7 @@ class ThreadsController extends AppController
         }
         return $this->redirect('/threads/view/'.$this->request->data['thread_id']);
 }
-
+*/
     /**
      * Add method
      *

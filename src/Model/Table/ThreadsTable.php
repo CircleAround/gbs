@@ -37,8 +37,17 @@ class ThreadsTable extends Table
 
         $this->hasMany('Comments', [
             'foreignKey' => 'thread_id',
+            'sort' => ['Comments.created_at' => 'DESC'],
         ]);
 
+        $this->addBehavior('Timestamp', [
+            'events' => [
+                'Model.beforeSave' => [
+                    'created_at' => 'new',
+                    'updated_at' => 'always',
+                ]
+            ]
+        ]);
 
     }
 
@@ -62,13 +71,14 @@ class ThreadsTable extends Table
             ->requirePresence('body', 'create')
             ->notEmpty('body');
 
+/*
         $validator
             ->requirePresence('created_at', 'create')
             ->notEmpty('created_at');
 
         $validator
             ->allowEmpty('updated_at');
-
+*/
         return $validator;
     }
 

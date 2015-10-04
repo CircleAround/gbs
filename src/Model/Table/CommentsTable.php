@@ -39,6 +39,16 @@ class CommentsTable extends Table
             'foreignKey' => 'actor_id',
             'joinType' => 'INNER'
         ]);
+ 
+        $this->addBehavior('Timestamp', [
+            'events' => [
+                'Model.beforeSave' => [
+                    'created_at' => 'new',
+                    'updated_at' => 'always',
+                ]
+            ]
+        ]);
+
     }
 
     /**
@@ -57,13 +67,14 @@ class CommentsTable extends Table
             ->requirePresence('body', 'create')
             ->notEmpty('body');
 
+ /*
         $validator
             ->requirePresence('created_at', 'create')
             ->notEmpty('created_at');
 
         $validator
             ->allowEmpty('updated_at');
-
+*/
         return $validator;
     }
 

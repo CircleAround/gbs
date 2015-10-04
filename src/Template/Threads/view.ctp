@@ -39,7 +39,8 @@
  <div class="comments index large-10 medium-9 columns">
     <h3>Comment</h3>
     <?php
-        echo $this->Form->create($comment,['action'=>'comment_add']);
+        echo $this->Form->create(null, array(
+            'url' => array('controller' => 'comments', 'action'=>'add')));
         echo $this->Form->input('body');
         echo $this->Form->button(__('Submit'));
         echo $this->Form->hidden('thread_id',array('value'=>$thread->id));
