@@ -49,21 +49,6 @@ class ThreadsController extends AppController
 
     }
 
-/*
-     public function comment_add() {
-        $comment = $this->Threads->Comments
-            ->newEntity($this->request->data);
-        if ($this->request->is('post')) {
-//            $comment->created_at = new \DateTime();
-            if ($this->Threads->Comments->save($comment)) {
-                $this->Flash->success(__('The comment has been saved.'));
-            }else{
-                $this->Flash->error(__('The comment could not be saved. Please, try again.'));
-            }
-        }
-        return $this->redirect('/threads/view/'.$this->request->data['thread_id']);
-}
-*/
     /**
      * Add method
      *
