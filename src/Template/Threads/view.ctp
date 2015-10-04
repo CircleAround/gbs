@@ -48,7 +48,6 @@
     ?>
 
     <table cellpadding="0" cellspacing="0">
-<!--    <thead>コメント一覧</thead> -->
     <tbody>
     <?php foreach ($thread->comments as $comment): ?>
         <tr>

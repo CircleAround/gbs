@@ -71,14 +71,13 @@ class ThreadsTable extends Table
             ->requirePresence('body', 'create')
             ->notEmpty('body');
 
-/*
-        $validator
-            ->requirePresence('created_at', 'create')
-            ->notEmpty('created_at');
+//        $validator
+//            ->requirePresence('created_at', 'create')
+//            ->notEmpty('created_at');
 
         $validator
             ->allowEmpty('updated_at');
-*/
+
         return $validator;
     }
 
