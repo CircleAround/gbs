@@ -43,10 +43,10 @@ class ThreadsController extends AppController
         $this->set('thread', $thread);
         $this->set('_serialize', ['thread']);
 
-        $comment_entity = $this->Threads->Comments
-        ->newEntity($this->request->data);
+        $comment = $this->Threads->Comments
+        ->newEntity();
 
-        $this->set('Comment_entity', $comment_entity);
+        $this->set('comment', $comment);
 
     }
 
