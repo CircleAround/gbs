@@ -45,12 +45,13 @@ class OauthController extends AppController
 
                 // We got an access token, let's now get the user's details
                 $user = $provider->getResourceOwner($token);
-                // ユーザー情報を配列で取得
+                // githubユーザー情報を配列で取得
                 $user_to_array = $user->toArray();
 
                 // 登録済みか確認
                 $query = TableRegistry::get('Users')->find();
                 $signed_up_user = $query->where(['uid' => $user_to_array['id']])->first();
+
 
                 if (isset($signed_up_user['uid'])) {
                     // 登録済みだったら、ログインさせる
@@ -59,21 +60,20 @@ class OauthController extends AppController
                     $this->redirect('/threads/index');
                 } else {
                     // 未登録の場合はデータベースに登録する
-                    $query = TableRegistry::get('Users')->query();
-                    $query
-                        ->insert(['name', 'uid', 'nickname', 'avator', 'access_token'])
-                        ->values([
-                            'name' => (empty($user->getName())) ? $user->getNickname() : $user->getName(),
-                            'uid' => $user->getId(),
-                            'nickname' => $user->getNickname(),
-                            'avator' => $user_to_array['avatar_url'],
-                            'access_token' => $token->getToken()
-                        ])
-                        ->execute();
+                    $usersTable = TableRegistry::get('Users');
+                    $new_user = $usersTable->newEntity();
+                    $data = [
+                        'name' => (empty($user->getName())) ? $user->getNickname() : $user->getName(),
+                        'uid' => $user->getId(),
+                        'nickname' => $user->getNickname(),
+                        'avator' => $user_to_array['avatar_url'],
+                        'access_token' => $token->getToken(),
+                        'email' => $user->getEmail()
+                    ];
+                    $new_user->set($data); // created_atを自動でセット
+                    $usersTable->save($new_user);
                     // ログインさせる
-                    $query = TableRegistry::get('Users')->find();
-                    $last_inserted_user = $query->where(['uid' => $user_to_array['id']])->last();
-                    $this->request->session()->write('user_id', $last_inserted_user['id']);
+                    $this->request->session()->write('user_id', $new_user->id);
                     // 一時的なリダイレクト先
                     $this->redirect('/threads/index');
                 }
