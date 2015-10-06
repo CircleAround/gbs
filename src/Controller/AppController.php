@@ -15,6 +15,7 @@
 namespace App\Controller;
 
 use Cake\Controller\Controller;
+use Cake\ORM\TableRegistry;
 
 /**
  * Application Controller
@@ -26,6 +27,9 @@ use Cake\Controller\Controller;
  */
 class AppController extends Controller
 {
+
+    protected $user_id;
+    protected $current_user;
 
     /**
      * Initialization hook method.
@@ -39,4 +43,19 @@ class AppController extends Controller
         parent::initialize();
         $this->loadComponent('Flash');
     }
+
+    public function currentUser()
+    {
+        if ($this->isLoggedIn()) {
+            return $this->current_user = TableRegistry::get('Users')->get($this->user_id);
+        }
+        return $this->current_user;
+    }
+
+    public function isLoggedIn()
+    {
+        $this->user_id = $this->request->session()->read('user_id');
+        return (!empty($this->user_id)) ? true : false;
+    }
+
 }
