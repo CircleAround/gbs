@@ -59,6 +59,7 @@ class ThreadsController extends AppController
         $thread = $this->Threads->newEntity();
         if ($this->request->is('post')) {
             $thread = $this->Threads->patchEntity($thread, $this->request->data);
+            $thread->actor_id = $this->currentUser()->id;
             if ($this->Threads->save($thread)) {
                 $this->Flash->success(__('The thread has been saved.'));
                 return $this->redirect(['action' => 'index']);
