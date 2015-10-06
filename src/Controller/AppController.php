@@ -46,6 +46,10 @@ class AppController extends Controller
 
     public function currentUser()
     {
+        if (!empty($this->current_user)) {
+            return $this->current_user;
+        }
+
         if ($this->isLoggedIn()) {
             return $this->current_user = TableRegistry::get('Users')->get($this->user_id);
         }
@@ -55,7 +59,7 @@ class AppController extends Controller
     public function isLoggedIn()
     {
         $this->user_id = $this->request->session()->read('user_id');
-        return (!empty($this->user_id)) ? true : false;
+        return !empty($this->user_id);
     }
 
 }
