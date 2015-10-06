@@ -66,7 +66,7 @@ class OauthController extends AppController
                         'name' => (empty($user->getName())) ? $user->getNickname() : $user->getName(),
                         'uid' => $user->getId(),
                         'nickname' => $user->getNickname(),
-                        'avator' => $user_to_array['avatar_url'],
+                        'avatar' => $user_to_array['avatar_url'],
                         'access_token' => $token->getToken(),
                         'email' => $user->getEmail()
                     ];
