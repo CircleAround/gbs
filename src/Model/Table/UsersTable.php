@@ -62,8 +62,8 @@ class UsersTable extends Table
             ->notEmpty('nickname');
 
         $validator
-            ->requirePresence('avator', 'create')
-            ->notEmpty('avator');
+            ->requirePresence('avatar', 'create')
+            ->notEmpty('avatar');
 
         $validator
             ->requirePresence('access_token', 'create')
