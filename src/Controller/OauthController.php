@@ -12,6 +12,11 @@ use Cake\ORM\TableRegistry;
 class OauthController extends AppController
 {
 
+    public function login()
+    {
+        return $this->redirect("https://github.com/login/oauth/authorize?client_id=" .env('GITHUB_CLIENT_ID'));
+    }
+
     public function github()
     {
         $provider = new \League\OAuth2\Client\Provider\Github([
