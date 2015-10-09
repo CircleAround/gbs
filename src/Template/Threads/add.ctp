@@ -9,7 +9,6 @@
     <fieldset>
         <legend><?= __('Add Thread') ?></legend>
         <?php
-            echo $this->Form->input('actor_id');
             echo $this->Form->input('title');
             echo $this->Form->input('body');
             echo $this->Form->input('created_at');
