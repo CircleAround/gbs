@@ -233,6 +233,7 @@ return [
              * manipulated before being executed.
              */
             'quoteIdentifiers' => false,
+            'unix_socket' => '/var/run/mysqld/mysqld.sock'
 
             /**
              * During development, if using MySQL < 5.6, uncommenting the
