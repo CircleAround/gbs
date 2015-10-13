@@ -19,7 +19,7 @@ class CommentsTableTest extends TestCase
     public $fixtures = [
         'app.comments',
         'app.threads',
-        'app.actors'
+        // 'app.actors'
     ];
 
     /**
