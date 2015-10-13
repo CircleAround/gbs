@@ -61,6 +61,13 @@ class OauthController extends AppController
                 if (isset($signed_up_user['uid'])) {
                     // 登録済みだったら、ログインさせる
                     $session = $this->request->session()->write('user_id', $signed_up_user['id']);
+                    // access_tokenをGitHubから取得してきた値で更新
+                    $usersTable = TableRegistry::get('Users');
+                    $data = [
+                        'access_token' => $token->getToken()
+                    ];
+                    $signed_up_user->set($data);
+                    $usersTable->save($signed_up_user);
                     // 一時的なリダイレクト先
                     $this->redirect('/threads/index');
                 } else {
