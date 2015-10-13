@@ -16,7 +16,7 @@ class OauthControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'app.oauth'
+        // 'app.oauth'
     ];
 
     /**

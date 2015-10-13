@@ -18,7 +18,7 @@ class CommentsControllerTest extends IntegrationTestCase
     public $fixtures = [
         'app.comments',
         'app.threads',
-        'app.actors'
+        // 'app.actors'
     ];
 
     /**
