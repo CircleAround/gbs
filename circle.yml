@@ -1,3 +1,9 @@
 machine:
   php:
     version: 5.6.5
+dependencies:
+  pre:
+    - sudo touch .env
+database:
+  post:
+    - ./bin/cake migrations migrate
