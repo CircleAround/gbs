@@ -4,3 +4,8 @@ machine:
 dependencies:
   pre:
     - sudo touch .env
+deployment:
+  production:
+    branch: master
+    commands:
+      - bash deployment_to_production.sh
