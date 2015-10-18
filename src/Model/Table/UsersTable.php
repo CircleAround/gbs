@@ -47,13 +47,18 @@ class UsersTable extends Table
     {
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('id', 'create');
+            ->notEmpty('id');
 
         $validator
             ->requirePresence('name', 'create')
             ->notEmpty('name');
 
         $validator
+            ->requirePresence('email', 'create')
+            ->notEmpty('email');
+
+        $validator
+            ->add('uid', 'unique', ['rule' => 'isUnique'])
             ->requirePresence('uid', 'create')
             ->notEmpty('uid');
 
@@ -68,13 +73,6 @@ class UsersTable extends Table
         $validator
             ->requirePresence('access_token', 'create')
             ->notEmpty('access_token');
-
-        $validator
-            ->requirePresence('created_at', 'create')
-            ->notEmpty('created_at');
-
-        $validator
-            ->allowEmpty('updated_at');
 
         return $validator;
     }

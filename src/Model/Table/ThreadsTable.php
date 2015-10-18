@@ -64,19 +64,16 @@ class ThreadsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
+            ->add('actor_id', 'valid', ['rule' => 'numeric'])
+            ->notEmpty('actor_id', 'create');
+
+        $validator
             ->requirePresence('title', 'create')
             ->notEmpty('title');
 
         $validator
             ->requirePresence('body', 'create')
             ->notEmpty('body');
-
-//        $validator
-//            ->requirePresence('created_at', 'create')
-//            ->notEmpty('created_at');
-
-        $validator
-            ->allowEmpty('updated_at');
 
         return $validator;
     }

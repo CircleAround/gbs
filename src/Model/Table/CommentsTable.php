@@ -64,15 +64,18 @@ class CommentsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('body', 'create')
-            ->notEmpty('body');
-
- //       $validator
- //           ->requirePresence('created_at', 'create')
- //           ->notEmpty('created_at');
+            ->add('thread_id', 'valid', ['rule' => 'numeric'])
+            ->requirePresence('thread_id', 'create')
+            ->notEmpty('thread_id');
 
         $validator
-            ->allowEmpty('updated_at');
+            ->add('actor_id', 'valid', ['rule' => 'numeric'])
+            ->requirePresence('actor_id', 'create')
+            ->notEmpty('actor_id');
+
+        $validator
+            ->requirePresence('body', 'create')
+            ->notEmpty('body');
 
         return $validator;
     }
