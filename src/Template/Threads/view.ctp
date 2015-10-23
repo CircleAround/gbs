@@ -39,7 +39,7 @@
  <div class="comments index large-10 medium-9 columns">
     <h3>Comment</h3>
     <?php
-        echo $this->Form->create(null, array(
+        echo $this->Form->create($comment, array(
             'url' => array('controller' => 'comments', 'action'=>'add')));
         echo $this->Form->input('body');
         echo $this->Form->button(__('Submit'));
