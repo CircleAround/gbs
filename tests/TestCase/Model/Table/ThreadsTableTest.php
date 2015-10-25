@@ -60,9 +60,39 @@ class ThreadsTableTest extends TestCase
      *
      * @return void
      */
-    public function testValidationDefault()
+
+    public function testValidationOK()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $thread = TableRegistry::get('Threads')->newEntity([
+            'title' => 'test Thread',
+            'body' => 'test Thread body'
+        ]);
+        $result = $this->Threads->save($thread);
+        $this->assertNotEquals(false, $result);
+    }
+
+    public function testValidationNG()
+    {
+        $thread = TableRegistry::get('Threads')->newEntity([
+            'title' => '',
+            'body' => 'test Thread body'
+        ]);
+        $result = $this->Threads->save($thread);
+        $this->assertEquals(false, $result);
+
+        $thread = TableRegistry::get('Threads')->newEntity([
+            'title' => 'test Thread',
+            'body' => ''
+        ]);
+        $result = $this->Threads->save($thread);
+        $this->assertEquals(false, $result);
+
+        $thread = TableRegistry::get('Threads')->newEntity([
+            'title' => '',
+            'body' => ''
+        ]);
+        $result = $this->Threads->save($thread);
+        $this->assertEquals(false, $result);
     }
 
     /**
