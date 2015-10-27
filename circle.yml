@@ -6,6 +6,6 @@ dependencies:
     - sudo touch .env
 deployment:
   production:
-    branch: master
+    branch: origin/77-circle-ci-push-to-heroku
     commands:
       - bash deployment_to_production.sh
