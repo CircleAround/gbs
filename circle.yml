@@ -8,4 +8,5 @@ deployment:
   production:
     branch: origin/77-circle-ci-push-to-heroku
     commands:
+      - curl -X POST --data-urlencode 'payload={"text": "【START】production環境へのデプロイを開始しました。"}' https://hooks.slack.com/services/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
       - deployment_to_production.sh
