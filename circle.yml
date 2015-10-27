@@ -8,4 +8,4 @@ deployment:
   production:
     branch: origin/77-circle-ci-push-to-heroku
     commands:
-      - bash deployment_to_production.sh
+      - deployment_to_production.sh
