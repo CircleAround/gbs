@@ -63,7 +63,7 @@ class ThreadsTableTest extends TestCase
 
     public function testValidationOK()
     {
-        $thread = TableRegistry::get('Threads')->newEntity([
+        $thread = $this->Threads->newEntity([
             'title' => 'test Thread',
             'body' => 'test Thread body'
         ]);
@@ -73,21 +73,21 @@ class ThreadsTableTest extends TestCase
 
     public function testValidationNG()
     {
-        $thread = TableRegistry::get('Threads')->newEntity([
+        $thread = $this->Threads->newEntity([
             'title' => '',
             'body' => 'test Thread body'
         ]);
         $result = $this->Threads->save($thread);
         $this->assertEquals(false, $result);
 
-        $thread = TableRegistry::get('Threads')->newEntity([
+        $thread = $this->Threads->newEntity([
             'title' => 'test Thread',
             'body' => ''
         ]);
         $result = $this->Threads->save($thread);
         $this->assertEquals(false, $result);
 
-        $thread = TableRegistry::get('Threads')->newEntity([
+        $thread = $this->Threads->newEntity([
             'title' => '',
             'body' => ''
         ]);
