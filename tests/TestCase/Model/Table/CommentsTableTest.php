@@ -61,9 +61,22 @@ class CommentsTableTest extends TestCase
      *
      * @return void
      */
-    public function testValidationDefault()
+    public function testValidationOK()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $comment = $this->Comments->newEntity([
+            'body' => 'test comment body'
+        ]);
+        $result = $this->Comments->save($comment);
+        $this->assertNotEquals(false, $result);
+    }
+
+    public function testValidationNG()
+    {
+        $comment = $this->Comments->newEntity([
+            'body' => ''
+        ]);
+        $result = $this->Comments->save($comment);
+        $this->assertEquals(false, $result);
     }
 
     /**
