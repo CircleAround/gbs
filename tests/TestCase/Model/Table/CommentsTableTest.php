@@ -64,6 +64,8 @@ class CommentsTableTest extends TestCase
     public function testValidationOK()
     {
         $comment = $this->Comments->newEntity([
+            'thread_id' => 1,
+            'actor_id' => 1,
             'body' => 'test comment body'
         ]);
         $result = $this->Comments->save($comment);
@@ -73,6 +75,8 @@ class CommentsTableTest extends TestCase
     public function testValidationNG()
     {
         $comment = $this->Comments->newEntity([
+            'thread_id' => 1,
+            'actor_id' => 1,
             'body' => ''
         ]);
         $result = $this->Comments->save($comment);
