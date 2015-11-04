@@ -19,6 +19,7 @@ class CommentsTableTest extends TestCase
     public $fixtures = [
         'app.comments',
         'app.threads',
+        'app.users'
         // 'app.actors'
     ];
 
@@ -61,9 +62,26 @@ class CommentsTableTest extends TestCase
      *
      * @return void
      */
-    public function testValidationDefault()
+    public function testValidationOK()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $comment = $this->Comments->newEntity([
+            'thread_id' => 1,
+            'actor_id' => 1,
+            'body' => 'test comment body'
+        ]);
+        $result = $this->Comments->save($comment);
+        $this->assertNotEquals(false, $result);
+    }
+
+    public function testValidationNG()
+    {
+        $comment = $this->Comments->newEntity([
+            'thread_id' => 1,
+            'actor_id' => 1,
+            'body' => ''
+        ]);
+        $result = $this->Comments->save($comment);
+        $this->assertEquals(false, $result);
     }
 
     /**
