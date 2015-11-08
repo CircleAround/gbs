@@ -59,8 +59,6 @@ class OauthController extends AppController
 
 
                 if (isset($signed_up_user['uid'])) {
-                    // 登録済みだったら、ログインさせる
-                    $session = $this->request->session()->write('user_id', $signed_up_user['id']);
                     // access_tokenをGitHubから取得してきた値で更新
                     $usersTable = TableRegistry::get('Users');
                     $data = [
@@ -68,6 +66,8 @@ class OauthController extends AppController
                     ];
                     $signed_up_user->set($data);
                     $usersTable->save($signed_up_user);
+
+                    $this->loginAs($signed_up_user);
                     // 一時的なリダイレクト先
                     $this->redirect('/threads/index');
                 } else {
@@ -85,13 +85,13 @@ class OauthController extends AppController
                     $new_user->set($data); // created_atを自動でセット
                     $usersTable->save($new_user);
                     // ログインさせる
-                    $this->request->session()->write('user_id', $new_user->id);
+                    $this->loginAs($new_user);
                     // 一時的なリダイレクト先
                     $this->redirect('/threads/index');
                 }
 
             } catch (Exception $e) {
-
+                // TODO: 後でちゃんとすること
                 // Failed to get user details
                 exit('Oh dear...');
             }
