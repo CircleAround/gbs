@@ -62,4 +62,14 @@ class AppController extends Controller
         return !empty($this->user_id);
     }
 
+    /**
+     * ユーザを与えたインスタンスによってログイン状態にさせる
+     * 主にテストに利用する
+     * @param  User $user ユーザ
+     */
+    public function loginAs($user){
+      $this->current_user = $user;
+      $this->request->session()->write('user_id', $user->id);
+    }
+
 }
