@@ -42,6 +42,7 @@ class CommentsFixture extends TestFixture
      *
      * @var array
      */
+    public $import = ['table' => 'comments'];
     public $records = [
         [
             'id' => 1,
