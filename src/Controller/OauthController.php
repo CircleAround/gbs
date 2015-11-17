@@ -69,7 +69,7 @@ class OauthController extends AppController
 
                     $this->loginAs($signed_up_user);
                     // 一時的なリダイレクト先
-                    $this->redirect('/threads/index');
+                    $this->redirect('/');
                 } else {
                     // 未登録の場合はデータベースに登録する
                     $usersTable = TableRegistry::get('Users');
@@ -87,7 +87,7 @@ class OauthController extends AppController
                     // ログインさせる
                     $this->loginAs($new_user);
                     // 一時的なリダイレクト先
-                    $this->redirect('/threads/index');
+                    $this->redirect('/');
                 }
 
             } catch (Exception $e) {
