@@ -32,6 +32,7 @@ class ThreadsControllerTest extends IntegrationTestCase
     {
         parent::setUp();
         $this->Users = TableRegistry::get('Users');
+        $this->Threads = TableRegistry::get('Threads');
     }
 
     /**
@@ -86,13 +87,11 @@ class ThreadsControllerTest extends IntegrationTestCase
      */
     public function testAddNG()
     {
-        //$Users = TableRegistry::get('Users');
         $user = $this->Users->find()->first();
         $this->session(['user_id' => $user->id]);
 
-        $threads = TableRegistry::get('Threads');
-        $query = $threads->find('all'); // 2レコード作成済み
-        $record_count = $query->count();
+        $query = $this->Threads->find('all'); // 2レコード作成済み
+        $this->assertEquals(2, $query->count());
 
         $data = [
             'actor_id' => $user->id,
@@ -106,21 +105,18 @@ class ThreadsControllerTest extends IntegrationTestCase
         $this->assertResponseContains('The thread could not be saved.');
 
         // データが書き込まれたか確認、NGでデータはかかれないので件数は変わらず2件
-        $threads = TableRegistry::get('Threads');
-        $query = $threads->find('all');
+        $query = $this->Threads->find('all');
         // 即値で判定するのがよい、ロジックは入れない
         $this->assertEquals(2, $query->count());
     }
 
     public function testAddOK()
     {
-        //$Users = TableRegistry::get('Users');
         $user = $this->Users->find()->first();
         $this->session(['user_id' => $user->id]);
 
-        $threads = TableRegistry::get('Threads');
-        $query = $threads->find('all'); // レコード作成済み
-        $record_count = $query->count();
+        $query = $this->Threads->find('all'); // 2レコード作成済み
+        $this->assertEquals(2, $query->count());
 
         $data = [
             'actor_id' => $user->id,
@@ -131,8 +127,7 @@ class ThreadsControllerTest extends IntegrationTestCase
         $this->post('/threads/add', $data);
 
         // データが書き込まれたか確認、OKなので3件になった
-        $threads = TableRegistry::get('Threads');
-        $query = $threads->find('all');
+        $query = $this->Threads->find('all');
         // 即値で判定するのがよい、ロジックは入れない
         $this->assertEquals(3, $query->count());
 
@@ -147,7 +142,6 @@ class ThreadsControllerTest extends IntegrationTestCase
      */
     public function testEditNG()
     {
-      //$Users = TableRegistry::get('Users');
       $user = $this->Users->find()->first();
       $this->session(['user_id' => $user->id]);
 
@@ -156,8 +150,7 @@ class ThreadsControllerTest extends IntegrationTestCase
       // flash文言のチェック
       $this->assertResponseContains('The thread could not be saved.');
 
-      $threads = TableRegistry::get('Threads');
-      $query = $threads->find()->where(['id' => 1]);
+      $query = $this->Threads->find()->where(['id' => 1]);
 
       $array = $query->toArray();
       $this->assertEquals('1-body', $array[0]['body']); // データは元のまま
@@ -165,14 +158,12 @@ class ThreadsControllerTest extends IntegrationTestCase
 
     public function testEditOK()
     {
-      //$Users = TableRegistry::get('Users');
       $user = $this->Users->find()->first();
       $this->session(['user_id' => $user->id]);
 
       $this->post('/threads/edit/1', ['body' => 'change1-body']);
 
-      $threads = TableRegistry::get('Threads');
-      $query = $threads->find()->where(['id' => 1]);
+      $query = $this->Threads->find()->where(['id' => 1]);
 
       $array = $query->toArray();
       $this->assertEquals('change1-body', $array[0]['body']);
