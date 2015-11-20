@@ -39,12 +39,21 @@ class ThreadsFixture extends TestFixture
      *
      * @var array
      */
+    public $import = ['table' => 'threads'];
     public $records = [
         [
             'id' => 1,
             'actor_id' => 1,
-            'title' => 'Lorem ipsum dolor sit amet',
-            'body' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
+            'title' => '1-title',
+            'body' => '1-body',
+            'created_at' => 1442243267,
+            'updated_at' => 1442243267
+        ],
+        [
+            'id' => 2,
+            'actor_id' => 1,
+            'title' => '2-title',
+            'body' => '2-body',
             'created_at' => 1442243267,
             'updated_at' => 1442243267
         ],
