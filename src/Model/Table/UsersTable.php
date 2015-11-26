@@ -34,6 +34,9 @@ class UsersTable extends Table
         $this->hasMany('Comments', [
             'foreignKey' => 'actor_id'
         ]);
+        $this->hasMany('Comment_Reactions', [
+            'foreignKey' => 'actor_id'
+        ]);
         $this->addBehavior('Timestamp', [
             'events' => [
                 'Model.beforeSave' => [
