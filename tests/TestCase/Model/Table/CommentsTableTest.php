@@ -108,7 +108,8 @@ class CommentsTableTest extends TestCase
         $this->assertEquals(1, $query->count());
 
         $user = $this->Users->find()->first();
-        $this->Comments->doReaction($user,2,1);
+        $comment = $this->Comments->get(1);
+        $comment->doReaction($user,2);
         $query = $this->Comment_Reactions->find('all'); // 2レコードになった
         $this->assertEquals(2, $query->count());
 
@@ -117,19 +118,20 @@ class CommentsTableTest extends TestCase
         $this->assertEquals(2, $array[1]['kind']);
         $this->assertEquals(1, $array[1]['value']);
     }
+
     public function testdoReactionNG()
     {
         // まず、actor_id = 1; kind = 99のレコードを作成、2レコードに
         $user = $this->Users->find()->first();
-        $this->Comments->doReaction($user,99,1);
+        $comment = $this->Comments->get(1);
+        $comment->doReaction($user, 99);
         $query = $this->Comment_Reactions->find('all');
         $this->assertEquals(2, $query->count());
 
         // 次、同じactor_id = 1; kind = 99なので、書き込まれず、2レコードのまま
         $user = $this->Users->find()->first();
-        $this->Comments->doReaction($user,99,1);
+        $comment->doReaction($user, 99);
         $query = $this->Comment_Reactions->find('all');
         $this->assertEquals(2, $query->count());
     }
-
 }
