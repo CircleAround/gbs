@@ -26,14 +26,9 @@ class Comment extends Entity
     /**
      * doReaction method
      *
-     * comment_reactionsで comment_reactions.actor_idが自分自身でかつ、
-     * comment_reactions.type=$reactionsのものが既にDB内にあれば何もしない
-     * そうでなければ、comment_reactions を下記の条件で作成する
-     * comment_reactions.actor_id = $actor->id
-     * comment_reactions.type=$reactions
-    */
+    **/
     public function doReaction($actor, $reactions)
-    //actorはUserのインスタンスとする、comment_idも入れています
+    //actorはUserのインスタンスとする
     {
         // DBに既にあれば登録しない
         $Comment_Reactions = TableRegistry::get('Comment_Reactions')->find();
