@@ -15,7 +15,6 @@
     <fieldset>
         <legend><?= __('Edit Thread') ?></legend>
         <?php
-            echo $this->Form->input('actor_id');
             echo $this->Form->input('title');
             echo $this->Form->input('body');
         ?>
