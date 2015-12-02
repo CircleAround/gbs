@@ -25,10 +25,9 @@ class Comment extends Entity
 
     /**
      * doReaction method
-     *
+     * actorはUserのインスタンスとする
     **/
     public function doReaction($actor, $reactions)
-    //actorはUserのインスタンスとする
     {
         // DBに既にあれば登録しない
         $Comment_Reactions = TableRegistry::get('Comment_Reactions')->find();
@@ -47,17 +46,17 @@ class Comment extends Entity
         }
     }
 
-    public function good_question($actor)
+    public function labelGoodQuestion($actor)
     {
         return doReaction($actor, Reactions::$GOOD_QUESTION);
     }
 
-    public function nice_advise($actor)
+    public function labelNiceAdvise($actor)
     {
         return doReaction($actor, Reactions::$NICE_ADVISE);
     }
 
-    public function answer($actor)
+    public function labelAnswer($actor)
     {
         return doReaction($actor, Reactions::$ANSWER);
 

@@ -99,7 +99,6 @@ class CommentsTableTest extends TestCase
 
     public function testdoReactionOK()
     {
-  //doReaction($actor, $reactions) //actorはUserのインスタンスとする
   // UNKNOWN:0; GOOD_QUESTION:1; NICE_ADVISE:2; UNKNOWN:99;
 
         // 現在、1レコードあり
