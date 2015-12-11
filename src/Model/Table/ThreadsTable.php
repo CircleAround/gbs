@@ -36,8 +36,7 @@ class ThreadsTable extends Table
         ]);
 
         $this->hasMany('Comments', [
-            'foreignKey' => 'thread_id',
-            'sort' => ['Comments.created_at' => 'DESC'],
+            'foreignKey' => 'thread_id'
         ]);
 
         $this->addBehavior('Timestamp', [
