@@ -42,12 +42,29 @@ class CommentsFixture extends TestFixture
      *
      * @var array
      */
+    public $import = ['table' => 'comments'];
     public $records = [
         [
             'id' => 1,
             'thread_id' => 1,
             'actor_id' => 1,
-            'body' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
+            'body' => 'thread1-comment1',
+            'created_at' => 1442997037,
+            'updated_at' => 1442997037
+        ],
+        [
+            'id' => 2,
+            'thread_id' => 1,
+            'actor_id' => 1,
+            'body' => 'thread1-comment2',
+            'created_at' => 1442997037,
+            'updated_at' => 1442997037
+        ],
+        [
+            'id' => 3,
+            'thread_id' => 1,
+            'actor_id' => 1,
+            'body' => 'thread1-comment3',
             'created_at' => 1442997037,
             'updated_at' => 1442997037
         ],

@@ -81,7 +81,7 @@ class OauthController extends AppController
                         'avatar' => $user_to_array['avatar_url'],
                         'access_token' => $token->getToken(),
                         'email' => $user->getEmail()
-                      ];
+                    ];
                     if (is_null($user->getEmail())) {
                         $this->request->session()->write('user_data', $data);
                         $this->redirect('/oauth/edit');
@@ -94,7 +94,6 @@ class OauthController extends AppController
                       $this->redirect('/');
                     }
                 }
-
             } catch (Exception $e) {
                 // TODO: 後でちゃんとすること
                 // Failed to get user details

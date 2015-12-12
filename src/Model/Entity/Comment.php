@@ -2,6 +2,7 @@
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
+use Cake\ORM\TableRegistry;
 
 /**
  * Comment Entity.
@@ -21,4 +22,43 @@ class Comment extends Entity
         '*' => true,
         'id' => false,
     ];
-}
+
+    /**
+     * doReaction method
+     * actorはUserのインスタンスとする
+    **/
+    public function doReaction($actor, $reactions)
+    {
+        // DBに既にあれば登録しない
+        $Comment_Reactions = TableRegistry::get('Comment_Reactions')->find();
+        $result = $Comment_Reactions->where(['comment_id'=>$this->id, 'actor_id' => $actor->id, 'kind' => $reactions])->first();
+
+        if ($result == null) {
+            $Comment_Reactions = TableRegistry::get('Comment_Reactions');
+            $new_reaction = $Comment_Reactions->newEntity();
+            $data = [
+                'comment_id' => $this->id,
+                'actor_id' => $actor->id,
+                'kind' => $reactions
+            ];
+            $new_reaction->set($data);
+            $Comment_Reactions->save($new_reaction);
+        }
+    }
+
+    public function labelGoodQuestion($actor)
+    {
+        return doReaction($actor, Reactions::$GOOD_QUESTION);
+    }
+
+    public function labelNiceAdvise($actor)
+    {
+        return doReaction($actor, Reactions::$NICE_ADVISE);
+    }
+
+    public function labelAnswer($actor)
+    {
+        return doReaction($actor, Reactions::$ANSWER);
+
+    }
+  }

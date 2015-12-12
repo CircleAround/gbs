@@ -58,7 +58,11 @@ class CommentsController extends AppController
             } else {
                 $this->Flash->error(__('The comment could not be saved. Please, try again.'));
             }
-            return $this->redirect('/threads/view/'.$this->request->data['thread_id']);
+            return $this->redirect([
+              'controller' => 'threads',
+              'action' => 'view',
+              $this->request->data['thread_id']
+            ]);
         }
         $threads = $this->Comments->Threads->find('list', ['limit' => 200]);
 //        $actors = $this->Comments->Actors->find('list', ['limit' => 200]);
@@ -82,7 +86,11 @@ class CommentsController extends AppController
             $comment = $this->Comments->patchEntity($comment, $this->request->data);
             if ($this->Comments->save($comment)) {
                 $this->Flash->success(__('The comment has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect([
+                  'controller' => 'threads',
+                  'action' => 'view',
+                  $this->request->data['thread_id']
+                ]);
             } else {
                 $this->Flash->error(__('The comment could not be saved. Please, try again.'));
             }
@@ -111,6 +119,10 @@ class CommentsController extends AppController
         } else {
             $this->Flash->error(__('The comment could not be deleted. Please, try again.'));
         }
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect([
+          'controller' => 'threads',
+          'action' => 'view',
+          $comment['thread_id']
+        ]);
     }
 }

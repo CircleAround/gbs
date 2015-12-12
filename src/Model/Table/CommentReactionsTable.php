@@ -1,20 +1,19 @@
 <?php
 namespace App\Model\Table;
 
-use App\Model\Entity\Comment;
+use App\Model\Entity\CommentReaction;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\ORM\TableRegistry;
 
 /**
- * Comments Model
+ * CommentReactions Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Threads
+ * @property \Cake\ORM\Association\BelongsTo $Comments
  * @property \Cake\ORM\Association\BelongsTo $Actors
  */
-class CommentsTable extends Table
+class CommentReactionsTable extends Table
 {
 
     /**
@@ -27,34 +26,18 @@ class CommentsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('comments');
+        $this->table('comment_reactions');
         $this->displayField('id');
         $this->primaryKey('id');
 
-        $this->belongsTo('Threads', [
-            'foreignKey' => 'thread_id',
+        $this->belongsTo('Comments', [
+            'foreignKey' => 'comment_id',
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Actors', [
-            'className' => 'Users',
             'foreignKey' => 'actor_id',
             'joinType' => 'INNER'
         ]);
-
-        $this->hasMany('Comment_Reactions', [
-            'foreignKey' => 'comment_id',
-            'sort' => ['Comment_Reactions.created_at' => 'DESC'],
-        ]);
-
-        $this->addBehavior('Timestamp', [
-            'events' => [
-                'Model.beforeSave' => [
-                    'created_at' => 'new',
-                    'updated_at' => 'always',
-                ]
-            ]
-        ]);
-
     }
 
     /**
@@ -70,18 +53,21 @@ class CommentsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->add('thread_id', 'valid', ['rule' => 'numeric'])
-            ->requirePresence('thread_id', 'create')
-            ->notEmpty('thread_id');
+            ->add('kind', 'valid', ['rule' => 'numeric'])
+            ->requirePresence('kind', 'create')
+            ->notEmpty('kind');
 
         $validator
-            ->add('actor_id', 'valid', ['rule' => 'numeric'])
-            ->requirePresence('actor_id', 'create')
-            ->notEmpty('actor_id');
+            ->add('value', 'valid', ['rule' => 'numeric'])
+            ->requirePresence('value', 'create')
+            ->notEmpty('value');
 
         $validator
-            ->requirePresence('body', 'create')
-            ->notEmpty('body');
+            ->requirePresence('created_at', 'create')
+            ->notEmpty('created_at');
+
+        $validator
+            ->allowEmpty('updated_at');
 
         return $validator;
     }
@@ -95,7 +81,7 @@ class CommentsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['thread_id'], 'Threads'));
+        $rules->add($rules->existsIn(['comment_id'], 'Comments'));
         $rules->add($rules->existsIn(['actor_id'], 'Actors'));
         return $rules;
     }
