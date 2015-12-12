@@ -70,6 +70,7 @@ class OauthController extends AppController
                     $this->loginAs($signed_up_user);
                     // 一時的なリダイレクト先
                     $this->redirect('/');
+                    $this->Flash->success(__('ログインしました'));
                 } else {
                     // 未登録の場合はデータベースに登録する
                     $usersTable = TableRegistry::get('Users');
@@ -88,6 +89,7 @@ class OauthController extends AppController
                     $this->loginAs($new_user);
                     // 一時的なリダイレクト先
                     $this->redirect('/');
+                    $this->Flash->success(__('ログインしました'));
                 }
 
             } catch (Exception $e) {
