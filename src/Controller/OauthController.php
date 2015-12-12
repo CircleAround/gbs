@@ -69,7 +69,7 @@ class OauthController extends AppController
 
                     $this->loginAs($signed_up_user);
                     // 一時的なリダイレクト先
-                    $this->redirect('/threads/index');
+                    $this->redirect('/');
                 } else {
                     // 未登録の場合はデータベースに登録する
                     $usersTable = TableRegistry::get('Users');
@@ -81,13 +81,18 @@ class OauthController extends AppController
                         'avatar' => $user_to_array['avatar_url'],
                         'access_token' => $token->getToken(),
                         'email' => $user->getEmail()
-                    ];
-                    $new_user->set($data); // created_atを自動でセット
-                    $usersTable->save($new_user);
-                    // ログインさせる
-                    $this->loginAs($new_user);
-                    // 一時的なリダイレクト先
-                    $this->redirect('/threads/index');
+                      ];
+                    if (is_null($user->getEmail())) {
+                        $this->request->session()->write('user_data', $data);
+                        $this->redirect('/oauth/edit');
+                    } else {
+                      $new_user->set($data); // created_atを自動でセット
+                      $usersTable->save($new_user);
+                      // ログインさせる
+                      $this->loginAs($new_user);
+                      // 一時的なリダイレクト先
+                      $this->redirect('/');
+                    }
                 }
 
             } catch (Exception $e) {
@@ -96,5 +101,28 @@ class OauthController extends AppController
                 exit('Oh dear...');
             }
         }
+    }
+
+    public function edit()
+    {
+        $usersTable = TableRegistry::get('Users');
+        $new_user = $usersTable->newEntity();
+        $this->set('new_user', $new_user);
+        try {
+            $user_data = $this->request->session()->read('user_data');
+            if ($this->request->is('post')) {
+                $user_data['email'] = $this->request->data['email'];
+                $new_user->set($user_data); // created_atを自動でセット
+                $usersTable->save($new_user);
+                // ログインさせる
+                $this->loginAs($new_user);
+                // 一時的なリダイレクト先
+                $this->redirect('/threads/index');
+            }
+        } catch (Exception $e) {
+            // TODO: 後でちゃんとすること
+            // Failed to get user details
+            exit('Oh dear...');
+        }          
     }
 }
