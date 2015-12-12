@@ -251,7 +251,7 @@ return [
             'className' => 'Cake\Database\Connection',
             'driver' => 'Cake\Database\Driver\Mysql',
             'persistent' => false,
-            'host' => 'localhost',
+            'host' => '127.0.0.1',
             //'port' => 'nonstandard_port_number',
             'username' => 'ubuntu',
             'password' => null,
