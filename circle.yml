@@ -12,7 +12,10 @@ database:
   override:
     - bin/cake migrations migrate
 deployment:
-  staging:
+  production:
     branch: master
-    heroku:
-      appname: gbs-app
+    commands:
+    - heroku maintenance:on --app gbs-app
+    - git push -f git@heroku.com:gbs-app.git $CIRCLE_SHA1:refs/heads/master
+    - heroku run 'bin/cake migrations migrate' --app gbs-app
+    - heroku maintenance:off --app gbs-app
