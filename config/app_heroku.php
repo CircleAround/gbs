@@ -25,39 +25,34 @@ return [
     ],
     'Cache' => [
         'default' => [
-            'className' => 'Memcached',
-            'prefix' => 'myapp_cake_',
-            'servers' => [env('MEMCACHIER_SERVERS')],
-            'username' => env('MEMCACHIER_USERNAME'),
-            'password' => env('MEMCACHIER_PASSWORD'),
-            'duration' => '+1440 minutes',
+            'className' => 'File',
+            'path' => CACHE,
         ],
 
-        'session' => [
-            'className' => 'Memcached',
-            'prefix' => 'myapp_cake_session_',
-            'servers' => [env('MEMCACHIER_SERVERS')],
-            'username' => env('MEMCACHIER_USERNAME'),
-            'password' => env('MEMCACHIER_PASSWORD'),
-            'duration' => '+1440 minutes',
-        ],
-
+        /**
+         * Configure the cache used for general framework caching. Path information,
+         * object listings, and translation cache files are stored with this
+         * configuration.
+         */
         '_cake_core_' => [
-            'className' => 'Memcached',
+            'className' => 'File',
             'prefix' => 'myapp_cake_core_',
-            'servers' => [env('MEMCACHIER_SERVERS')],
-            'username' => env('MEMCACHIER_USERNAME'),
-            'password' => env('MEMCACHIER_PASSWORD'),
-            'duration' => '+1 years',
+            'path' => CACHE . 'persistent/',
+            'serialize' => true,
+            'duration' => '+2 minutes',
         ],
 
+        /**
+         * Configure the cache for model and datasource caches. This cache
+         * configuration is used to store schema descriptions, and table listings
+         * in connections.
+         */
         '_cake_model_' => [
-            'className' => 'Memcached',
+            'className' => 'File',
             'prefix' => 'myapp_cake_model_',
-            'servers' => [env('MEMCACHIER_SERVERS')],
-            'username' => env('MEMCACHIER_USERNAME'),
-            'password' => env('MEMCACHIER_PASSWORD'),
-            'duration' => '+1 years',
+            'path' => CACHE . 'models/',
+            'serialize' => true,
+            'duration' => '+2 minutes',
         ],
     ],
     'Error' => [
@@ -116,9 +111,6 @@ return [
         ],
     ],
     'Session' => [
-        'defaults' => 'cache',
-        'handler' => [
-            'config' => 'session'
-        ]
+      'defaults' => 'php',
     ],
   ];
