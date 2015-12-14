@@ -74,7 +74,7 @@ try {
 // shared configuration.
 //Configure::load('app_local', 'default');
 if (isset($_ENV['CAKE_ENV'])) {
-    Configure::load('app.' . $_ENV['CAKE_ENV'], 'default');
+    Configure::load('app_' . $_ENV['CAKE_ENV'], 'default');
 }
 
 // When debug = false the metadata cache should last
