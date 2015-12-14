@@ -53,6 +53,7 @@ Router::scope('/', function ($routes) {
      * ...and connect the rest of 'Pages' controller's URLs.
      */
     $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
+    $routes->connect('/oauth/github', ['controller' => 'Oauth', 'action' => 'github']);
 
     /**
      * Connect catchall routes for all controllers.
@@ -72,9 +73,6 @@ Router::scope('/', function ($routes) {
      */
     $routes->fallbacks('InflectedRoute');
 });
-
-// githubでoauth認証
-Router::connect('/oauth/github', ['controller' => 'oauth', 'action' => 'github']);
 
 /**
  * Load all plugin routes.  See the Plugin documentation on
