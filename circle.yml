@@ -6,6 +6,8 @@ environment:
 dependencies:
   pre:
     - sudo touch .env
+  cache_directories:
+    - ~/.composer/cache
 database:
   override:
     - bin/cake migrations migrate
