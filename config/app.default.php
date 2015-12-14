@@ -223,8 +223,7 @@ return [
             'timezone' => 'UTC',
             'cacheMetadata' => true,
             'log' => false,
-            'unix_socket' => '/var/run/mysqld/mysqld.sock',
-            
+
             /**
              * Set identifier quoting to true if you are using reserved words or
              * special characters in your table or column names. Enabling this
