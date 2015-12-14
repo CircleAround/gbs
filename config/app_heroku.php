@@ -25,34 +25,36 @@ return [
     ],
     'Cache' => [
         'default' => [
-            'className' => 'File',
-            'path' => CACHE,
+            'className' => 'Memcached',
+            'prefix' => 'myapp_cake_',
+            'servers' => [env('MEMCACHIER_SERVERS')],
+            'username' => env('MEMCACHIER_USERNAME'),
+            'password' => env('MEMCACHIER_PASSWORD'),
+            'duration' => '+1440 minutes',
         ],
-
-        /**
-         * Configure the cache used for general framework caching. Path information,
-         * object listings, and translation cache files are stored with this
-         * configuration.
-         */
+        'session' => [
+            'className' => 'Memcached',
+            'prefix' => 'myapp_cake_session_',
+            'servers' => [env('MEMCACHIER_SERVERS')],
+            'username' => env('MEMCACHIER_USERNAME'),
+            'password' => env('MEMCACHIER_PASSWORD'),
+            'duration' => '+1440 minutes',
+        ],
         '_cake_core_' => [
-            'className' => 'File',
+            'className' => 'Memcached',
             'prefix' => 'myapp_cake_core_',
-            'path' => CACHE . 'persistent/',
-            'serialize' => true,
-            'duration' => '+2 minutes',
+            'servers' => [env('MEMCACHIER_SERVERS')],
+            'username' => env('MEMCACHIER_USERNAME'),
+            'password' => env('MEMCACHIER_PASSWORD'),
+            'duration' => '+1 years',
         ],
-
-        /**
-         * Configure the cache for model and datasource caches. This cache
-         * configuration is used to store schema descriptions, and table listings
-         * in connections.
-         */
         '_cake_model_' => [
-            'className' => 'File',
+            'className' => 'Memcached',
             'prefix' => 'myapp_cake_model_',
-            'path' => CACHE . 'models/',
-            'serialize' => true,
-            'duration' => '+2 minutes',
+            'servers' => [env('MEMCACHIER_SERVERS')],
+            'username' => env('MEMCACHIER_USERNAME'),
+            'password' => env('MEMCACHIER_PASSWORD'),
+            'duration' => '+1 years',
         ],
     ],
     'Error' => [
@@ -111,6 +113,9 @@ return [
         ],
     ],
     'Session' => [
-      'defaults' => 'php',
+        'defaults' => 'cache',
+        'handler' => [
+            'config' => 'session'
+        ]
     ],
   ];
