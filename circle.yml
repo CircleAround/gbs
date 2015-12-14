@@ -1,6 +1,11 @@
 machine:
   php:
     version: 5.6.5
+environment:
+    CAKE_ENV: test
 dependencies:
   pre:
     - sudo touch .env
+database:
+  override:
+    - bin/cake migrations migrate
