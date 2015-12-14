@@ -53,7 +53,7 @@ Router::scope('/', function ($routes) {
      * ...and connect the rest of 'Pages' controller's URLs.
      */
     $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
-    $routes->connect('/oauth/github', ['controller' => 'oauth', 'action' => 'github']);
+    $routes->connect('/oauth/github', ['controller' => 'Oauth', 'action' => 'github']);
 
     /**
      * Connect catchall routes for all controllers.
