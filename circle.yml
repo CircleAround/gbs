@@ -11,3 +11,8 @@ dependencies:
 database:
   override:
     - bin/cake migrations migrate
+deployment:
+  staging:
+    branch: master
+    heroku:
+      appname: gbs-app
