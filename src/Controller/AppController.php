@@ -44,6 +44,20 @@ class AppController extends Controller
         $this->loadComponent('Flash');
     }
 
+    public function shouldLogin(){
+      return false;
+    }
+
+    public function beforeFilter(\Cake\Event\Event $event){
+      if ($this->shouldLogin()){
+        $this->Flash->success(__('ログインしてください'));
+        return $this->redirect([
+          'controller' => 'threads',
+          'action' => 'index'
+        ]);
+      }
+    }
+
     public function currentUser()
     {
         if (!empty($this->current_user)) {
