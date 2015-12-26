@@ -51,10 +51,7 @@ class AppController extends Controller
     public function beforeFilter(\Cake\Event\Event $event){
       if ($this->shouldLogin()){
         $this->Flash->success(__('ログインしてください'));
-        return $this->redirect([
-          'controller' => 'threads',
-          'action' => 'index'
-        ]);
+        return $this->redirect('/');
       }
     }
 
