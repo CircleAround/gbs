@@ -1,7 +1,9 @@
 <div class="actions columns large-2 medium-3">
     <h3><?= __('Actions') ?></h3>
     <ul class="side-nav">
+      <?php if(empty($login_status)) { ?>
         <li><?= $this->Html->link(__('New Thread'), ['action' => 'add']) ?></li>
+      <?php } ?>
     </ul>
 </div>
 <div class="threads index large-10 medium-9 columns">
@@ -26,8 +28,10 @@
             <td><?= h($thread->updated_at) ?></td>
             <td class="actions">
                 <?= $this->Html->link(__('View'), ['action' => 'view', $thread->id]) ?>
-                <?= $this->Html->link(__('Edit'), ['action' => 'edit', $thread->id]) ?>
-                <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $thread->id], ['confirm' => __('Are you sure you want to delete # {0}?', $thread->id)]) ?>
+                <?php if(empty($login_status)) { ?>
+                  <?= $this->Html->link(__('Edit'), ['action' => 'edit', $thread->id]) ?>
+                  <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $thread->id], ['confirm' => __('Are you sure you want to delete # {0}?', $thread->id)]) ?>
+                <?php } ?>
             </td>
         </tr>
 

@@ -19,6 +19,13 @@ class ThreadsController extends AppController
     return false;
   }
 
+  public function beforeFilter(\Cake\Event\Event $event){
+    if ($this->shouldLogin()){
+      return $this->set('login_status','');
+    }
+    return $this->set('login_status', 'login-ok');
+  }
+
     /**
      * Index method
      *
