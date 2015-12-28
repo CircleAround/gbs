@@ -49,6 +49,7 @@ class AppController extends Controller
     }
 
     public function beforeFilter(\Cake\Event\Event $event){
+      $this->set('current_user', $this->currentUser());
       if ($this->shouldLogin()){
         $this->Flash->success(__('ログインしてください'));
         return $this->redirect('/');

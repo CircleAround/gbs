@@ -1,12 +1,18 @@
 <div class="actions columns large-2 medium-3">
     <h3><?= __('Actions') ?></h3>
     <ul class="side-nav">
+      <?php if(!empty($current_user)) { ?>
         <li><?= $this->Html->link(__('Edit Comment'), ['action' => 'edit', $comment->id]) ?> </li>
         <li><?= $this->Form->postLink(__('Delete Comment'), ['action' => 'delete', $comment->id], ['confirm' => __('Are you sure you want to delete # {0}?', $comment->id)]) ?> </li>
+      <?php } ?>
         <li><?= $this->Html->link(__('List Comments'), ['action' => 'index']) ?> </li>
+      <?php if(!empty($current_user)) { ?>
         <li><?= $this->Html->link(__('New Comment'), ['action' => 'add']) ?> </li>
+      <?php } ?>
         <li><?= $this->Html->link(__('List Threads'), ['controller' => 'Threads', 'action' => 'index']) ?> </li>
+      <?php if(!empty($current_user)) { ?>
         <li><?= $this->Html->link(__('New Thread'), ['controller' => 'Threads', 'action' => 'add']) ?> </li>
+      <?php } ?>
     </ul>
 </div>
 <div class="comments view large-10 medium-9 columns">
