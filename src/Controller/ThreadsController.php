@@ -18,7 +18,6 @@ class ThreadsController extends AppController
     }
     return false;
   }
-
     /**
      * Index method
      *
