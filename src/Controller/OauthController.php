@@ -66,7 +66,6 @@ class OauthController extends AppController
                     ];
                     $signed_up_user->set($data);
                     $usersTable->save($signed_up_user);
-
                     $this->loginAndRedirect($signed_up_user);
                 } else {
                     // 未登録の場合はデータベースに登録する
@@ -122,5 +121,6 @@ class OauthController extends AppController
     {
         $this->loginAs($user);
         $this->redirect('/');
+        $this->Flash->success(__('ログインしました'));
     }  
 }

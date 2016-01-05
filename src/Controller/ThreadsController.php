@@ -11,6 +11,13 @@ use App\Controller\AppController;
 class ThreadsController extends AppController
 {
 
+  public function shouldLogin(){
+    $action = $this->request->params['action'];
+    if($action != 'index' and $action != 'view' and !$this->isLoggedIn()){
+      return true;
+    }
+    return false;
+  }
     /**
      * Index method
      *

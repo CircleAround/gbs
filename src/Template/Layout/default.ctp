@@ -40,8 +40,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <span><?= $this->fetch('title') ?></span>
         </div>
         <div class="header-help">
-            <span><a target="_blank" href="">新規</a></span>
-            <span><a target="_blank" href="">ログイン</a></span>
+            <span><a href="">新規</a></span>
+            <span><a href="/oauth/login">ログイン</a></span>
             <span><a target="_blank" href="">ヘルプ</a></span>
         </div>
         <div class="header-menu">

@@ -1,6 +1,21 @@
 machine:
   php:
     version: 5.6.5
+  environment:
+    CAKE_ENV: test
 dependencies:
   pre:
     - sudo touch .env
+  cache_directories:
+    - ~/.composer/cache
+database:
+  override:
+    - bin/cake migrations migrate
+deployment:
+  production:
+    branch: master
+    commands:
+    - heroku maintenance:on --app gbs-app
+    - git push -f git@heroku.com:gbs-app.git $CIRCLE_SHA1:refs/heads/master
+    - heroku run 'bin/cake migrations migrate' --app gbs-app
+    - heroku maintenance:off --app gbs-app
