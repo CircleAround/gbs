@@ -67,13 +67,9 @@ class OauthController extends AppController
                     $signed_up_user->set($data);
                     $usersTable->save($signed_up_user);
 
-                    $this->loginAs($signed_up_user);
-                    // 一時的なリダイレクト先
-                    $this->redirect('/');
+                    $this->loginAndRedirect($signed_up_user);
                 } else {
                     // 未登録の場合はデータベースに登録する
-                    $usersTable = TableRegistry::get('Users');
-                    $new_user = $usersTable->newEntity();
                     $data = [
                         'name' => (empty($user->getName())) ? $user->getNickname() : $user->getName(),
                         'uid' => $user->getId(),
@@ -86,12 +82,11 @@ class OauthController extends AppController
                         $this->request->session()->write('user_data', $data);
                         $this->redirect('/oauth/edit');
                     } else {
-                      $new_user->set($data); // created_atを自動でセット
-                      $usersTable->save($new_user);
-                      // ログインさせる
-                      $this->loginAs($new_user);
-                      // 一時的なリダイレクト先
-                      $this->redirect('/');
+                        $usersTable = TableRegistry::get('Users');
+                        $new_user = $usersTable->newEntity();
+                        $new_user->set($data); // created_atを自動でセット
+                        $usersTable->save($new_user);
+                        $this->loginAndRedirect($new_user);
                     }
                 }
             } catch (Exception $e) {
@@ -111,12 +106,10 @@ class OauthController extends AppController
             $user_data = $this->request->session()->read('user_data');
             if ($this->request->is('post')) {
                 $user_data['email'] = $this->request->data['email'];
+                $this->request->session()->delete('user_data');
                 $new_user->set($user_data); // created_atを自動でセット
                 $usersTable->save($new_user);
-                // ログインさせる
-                $this->loginAs($new_user);
-                // 一時的なリダイレクト先
-                $this->redirect('/threads/index');
+                $this->loginAndRedirect($new_user);
             }
         } catch (Exception $e) {
             // TODO: 後でちゃんとすること
@@ -124,4 +117,10 @@ class OauthController extends AppController
             exit('Oh dear...');
         }          
     }
+
+    public function loginAndRedirect($user)
+    {
+        $this->loginAs($user);
+        $this->redirect('/');
+    }  
 }
