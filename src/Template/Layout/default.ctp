@@ -24,7 +24,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<title>GBS｜ログイン前</title>
+<title>GBS｜ログイン前後</title>
 
 <?= $this->Html->meta('icon') ?>
 
@@ -45,14 +45,18 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
       <h1><a href="/"><img src="../../../../../img/logo.png" width="119" height="35" alt="答えを教えないオンライントレーニングGBS"></a></h1>
         <nav>
             <ul>
-              <li><a href="../../../../../design/01/signup.html">質問</a></li>
+              <li><a href="/threads/add">質問</a></li>
                 <li><a href="../../../../../design/01/tag.html">タグ</a></li>
                 <li><a href="../../../../../design/01/yet.html">未回答</a></li>
                 <li><a href="../../../../../design/01/explain.html">使い方</a></li>
             </ul>
         </nav>
         <div id="boutton">
-          <a href="https://github.com/" class="btn cg_o">Sign up</a><a href="signup.html" target="_blank" class="btn cg_g">Sign in</a>
+        <?php if(!empty($current_user)) { ?>
+          <a href="/" class="btn cg_g">Sign out</a>
+        <?php } else { ?>
+          <a href="/oauth/login" class="btn cg_o">Sign up</a><a href="/" target="_blank" class="btn cg_g">Sign in</a>
+        <?php } ?>
         </div>
     </div><!-- inner -->
   </header><!-- header -->
