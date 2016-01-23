@@ -2,7 +2,7 @@
     <h3><?= __('登録') ?></h3>
 </div>
 <div class="threads form large-10 medium-9 columns">
-    <?= $this->Form->create($new_user) ?>
+    <?= $this->Form->create('Users') ?>
     <fieldset>
         <?php
             echo $this->Form->input('email');

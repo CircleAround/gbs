@@ -81,11 +81,7 @@ class OauthController extends AppController
                         $this->request->session()->write('user_data', $data);
                         $this->redirect('/oauth/edit');
                     } else {
-                        $usersTable = TableRegistry::get('Users');
-                        $new_user = $usersTable->newEntity();
-                        $new_user->set($data); // created_atを自動でセット
-                        $usersTable->save($new_user);
-                        $this->loginAndRedirect($new_user);
+                        $this->saveUserAndLogin($data);
                     }
                 }
             } catch (Exception $e) {
@@ -98,17 +94,12 @@ class OauthController extends AppController
 
     public function edit()
     {
-        $usersTable = TableRegistry::get('Users');
-        $new_user = $usersTable->newEntity();
-        $this->set('new_user', $new_user);
         try {
             $user_data = $this->request->session()->read('user_data');
             if ($this->request->is('post')) {
                 $user_data['email'] = $this->request->data['email'];
                 $this->request->session()->delete('user_data');
-                $new_user->set($user_data); // created_atを自動でセット
-                $usersTable->save($new_user);
-                $this->loginAndRedirect($new_user);
+                $this->saveUserAndLogin($user_data);
             }
         } catch (Exception $e) {
             // TODO: 後でちゃんとすること
@@ -123,4 +114,13 @@ class OauthController extends AppController
         $this->redirect('/');
         $this->Flash->success(__('ログインしました'));
     }  
+
+    public function saveUserAndLogin($data)
+    {
+        $usersTable = TableRegistry::get('Users');
+        $new_user   = $usersTable->newEntity();
+        $new_user->set($data);
+        $usersTable->save($new_user);
+        $this->loginAndRedirect($new_user);
+    }
 }
