@@ -42,7 +42,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <div class="inner">
             <h1>
               <?php
-                  echo $this->Html->image("/img/logo.png", [
+                  echo $this->Html->image("logo.png", [
                       "alt" => "答えを教えないオンライントレーニングGBS",
                       'url' => '/',
                       ['width'=>119,'height'=>35]
@@ -78,7 +78,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <footer>
             <div class="inner">
                 <?php
-                    echo $this->Html->image("/img/logo.png", ['class'=>'logo'], [
+                    echo $this->Html->image("logo.png", ['class'=>'logo'], [
                        "alt" => "GBS",
                        'url' => '/',
                         ['width'=>119,'height'=>35]
