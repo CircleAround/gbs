@@ -66,15 +66,9 @@ class OauthController extends AppController
                     ];
                     $signed_up_user->set($data);
                     $usersTable->save($signed_up_user);
-
-                    $this->loginAs($signed_up_user);
-                    // 一時的なリダイレクト先
-                    $this->redirect('/');
-                    $this->Flash->success(__('ログインしました'));
+                    $this->loginAndRedirect($signed_up_user);
                 } else {
                     // 未登録の場合はデータベースに登録する
-                    $usersTable = TableRegistry::get('Users');
-                    $new_user = $usersTable->newEntity();
                     $data = [
                         'name' => (empty($user->getName())) ? $user->getNickname() : $user->getName(),
                         'uid' => $user->getId(),
@@ -83,20 +77,50 @@ class OauthController extends AppController
                         'access_token' => $token->getToken(),
                         'email' => $user->getEmail()
                     ];
-                    $new_user->set($data); // created_atを自動でセット
-                    $usersTable->save($new_user);
-                    // ログインさせる
-                    $this->loginAs($new_user);
-                    // 一時的なリダイレクト先
-                    $this->redirect('/');
-                    $this->Flash->success(__('ログインしました'));
+                    if (is_null($user->getEmail())) {
+                        $this->request->session()->write('user_data', $data);
+                        $this->redirect('/oauth/edit');
+                    } else {
+                        $this->saveUserAndLogin($data);
+                    }
                 }
-
             } catch (Exception $e) {
                 // TODO: 後でちゃんとすること
                 // Failed to get user details
                 exit('Oh dear...');
             }
         }
+    }
+
+    public function edit()
+    {
+        try {
+            $user_data = $this->request->session()->read('user_data');
+            if ($this->request->is('post')) {
+                $user_data['email'] = $this->request->data['email'];
+                $this->request->session()->delete('user_data');
+                $this->saveUserAndLogin($user_data);
+            }
+        } catch (Exception $e) {
+            // TODO: 後でちゃんとすること
+            // Failed to get user details
+            exit('Oh dear...');
+        }          
+    }
+
+    public function loginAndRedirect($user)
+    {
+        $this->loginAs($user);
+        $this->redirect('/');
+        $this->Flash->success(__('ログインしました'));
+    }  
+
+    public function saveUserAndLogin($data)
+    {
+        $usersTable = TableRegistry::get('Users');
+        $new_user   = $usersTable->newEntity();
+        $new_user->set($data);
+        $usersTable->save($new_user);
+        $this->loginAndRedirect($new_user);
     }
 }
