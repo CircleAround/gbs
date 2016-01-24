@@ -19,51 +19,81 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 <html>
 <head>
     <?= $this->Html->charset() ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        <?= $cakeDescription ?>:
-        <?= $this->fetch('title') ?>
-    </title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>GBS｜ログイン前後</title>
+
     <?= $this->Html->meta('icon') ?>
 
     <?= $this->Html->css('base.css') ?>
     <?= $this->Html->css('cake.css') ?>
+    <?= $this->Html->css('reset.css') ?>
+    <?= $this->Html->css('common.css') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
+
 <body>
     <header>
-        <div class="header-title">
-            <?= $this->Html->image('http://cakephp.org/img/cake-logo.png', ['id' => 'hlogo', 'width' => 50, 'height' => 50]) ?>
-            <span><?= $this->fetch('title') ?></span>
-        </div>
-        <div class="header-help">
-            <span><a href="">新規</a></span>
-            <span><a href="/oauth/login">ログイン</a></span>
-            <span><a target="_blank" href="">ヘルプ</a></span>
-        </div>
-        <div class="header-menu">
-            <div id="hmenu">
-                <ui>
-                    <li><a id="question" href="">質問</a>
-                    </li>
-                </ui>
-            </div>
-        </div>
-    </header>
-    <div id="container">
+        <div class="inner">
+            <h1>
+              <?php
+                  echo $this->Html->image("logo.png", [
+                      "alt" => "答えを教えないオンライントレーニングGBS",
+                      'url' => '/',
+                      ['width'=>119,'height'=>35]
+                      ]);
+              ?>
+            </h1>
+            <nav>
+                <ul>
+                  <li><a href="/threads/add">質問</a></li>
+                  <li><a href="../../../../../design/01/tag.html">タグ</a></li>
+                  <li><a href="../../../../../design/01/yet.html">未回答</a></li>
+                  <li><a href="../../../../../design/01/explain.html">使い方</a></li>
+                </ul>
+            </nav>
+            <div id="boutton">
+                <?php if(!empty($current_user)) { ?>
+                <a href="/" class="btn cg_g">Sign out</a>
+                <?php } else { ?>
+                <a href="/oauth/login" class="btn cg_o">Sign up</a><a href="/" target="_blank" class="btn cg_g">Sign in</a>
+                <?php } ?>
+            </div><!-- boutton -->
+        </div><!-- inner -->
+    </header><!-- header -->
 
+    <div id="container">
         <div id="content">
             <?= $this->Flash->render() ?>
 
             <div class="row">
                 <?= $this->fetch('content') ?>
-            </div>
-        </div>
+            </div><!-- row -->
+        </div><!-- content -->
         <footer>
+            <div class="inner">
+                <?php
+                    echo $this->Html->image("logo.png", ['class'=>'logo'], [
+                       "alt" => "GBS",
+                       'url' => '/',
+                        ['width'=>119,'height'=>35]
+                    ]);
+                ?>
+            	  <ul id="fNav">
+                	  <li><a href="../../../../../design/01/summary.html">利用規約</a></li>
+                    <li><a href="../../../../../design/01/summary.html">プライバシーポリシー</a></li>
+                    <li><a href="../../../../../design/01/summary.html">ヘルプ</a></li>
+                    <li><a href="../../../../../design/01/summary.html">Special Thanks</a></li>
+                    <li><a href="../../../../../design/01/summary.html">運営会社</a></li>
+                </ul>
+                <small>© 2015 GBS,Inc.All rights reserved.</small>
+            </div><!-- inner -->
         </footer>
-    </div>
+    </div><!-- container -->
 </body>
 </html>
