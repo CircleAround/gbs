@@ -70,10 +70,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <div id="container">
         <div id="content">
             <?= $this->Flash->render() ?>
-
-            <div class="row">
-                <?= $this->fetch('content') ?>
-            </div><!-- row -->
+            <?= $this->fetch('content') ?>
         </div><!-- content -->
         <footer>
             <div class="inner">
