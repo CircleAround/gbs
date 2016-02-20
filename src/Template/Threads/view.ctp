@@ -1,66 +1,76 @@
-<?php if(!empty($current_user)) {$user = $current_user->toArray();} ?>
+<div class="actions columns large-2 medium-3">
+    <h3><?= __('Actions') ?></h3>
+    <ul class="side-nav">
+      <?php if(!empty($current_user)) { ?>
+        <li><?= $this->Html->link(__('Edit Thread'), ['action' => 'edit', $thread->id]) ?> </li>
+        <li><?= $this->Form->postLink(__('Delete Thread'), ['action' => 'delete', $thread->id], ['confirm' => __('Are you sure you want to delete # {0}?', $thread->id)]) ?> </li>
+      <?php } ?>
+        <li><?= $this->Html->link(__('List Threads'), ['action' => 'index']) ?> </li>
+      <?php if(!empty($current_user)) { ?>
+        <li><?= $this->Html->link(__('New Thread'), ['action' => 'add']) ?> </li>
+      <?php } ?>
+    </ul>
+</div>
+<div class="threads view large-10 medium-9 columns">
+    <h2><?= h($thread->title) ?></h2>
+    <div class="row">
+        <div class="large-5 columns strings">
+            <h6 class="subheader"><?= __('Title') ?></h6>
+            <p><?= h($thread->title) ?></p>
+        </div>
+        <div class="large-2 columns numbers end">
+            <h6 class="subheader"><?= __('Id') ?></h6>
+            <p><?= $this->Number->format($thread->id) ?></p>
+            <h6 class="subheader"><?= __('Actor Id') ?></h6>
+            <p><?= $this->Number->format($thread->actor_id) ?></p>
+        </div>
+        <div class="large-2 columns dates end">
+            <h6 class="subheader"><?= __('Created At') ?></h6>
+            <p><?= h($thread->created_at) ?></p>
+            <h6 class="subheader"><?= __('Updated At') ?></h6>
+            <p><?= h($thread->updated_at) ?></p>
+        </div>
+    </div>
+    <div class="row texts">
+        <div class="columns large-9">
+<!--            <h6 class="subheader"><?= __('Body') ?></h6> -->
+            <?= $this->Text->autoParagraph(h($thread->body)) ?>
+        </div>
+    </div>
 
-    <div class="inner">
-    <div id="left">
-  			<section>
-            <h2>質問内容</h2>
-                <div class="qTitleArea qTitlePos">
-                    <h3 class="qTitle"><?= h($thread->title) ?>
-                    <ul class="niceWrap answerPos">
-                        <li><span class="nice c_b">いい質問</span><span class="balloon">12</span></li>
-                        <li><span class="nice c_o">いいアドバイス</span><span class="balloon">12</span></li>
-                        <li><span class="nice c_g">閲覧数</span><span class="balloon">12</span></li>
-                    </ul>
-                </div><!-- qTitleArea -->
-                <p><?= $this->Text->autoParagraph(h($thread->body)) ?></p>
-                <?php if(!empty($current_user)) { ?>
-                  <?= $this->Html->link(__('Edit'), ['action' => 'edit', $thread->id]) ?>
-                  <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $thread->id], ['confirm' => __('Are you sure you want to delete # {0}?', $thread->id)]) ?>
-                <?php } ?>
 
 
-            <h2 class="c_orange">回答</h2>
-            <?php foreach ($thread->comments as $comment): ?>
-                  <?php if (!empty($current_user) && $comment->actor_id == $user['id']) { ?>
-                    <div class="boxR">
-                        <div class="boxInner">
-                          <div class="updateList upWrap up_c_y">更新日時:<span class="time"><?= h($thread->updated_at) ?></span><span class="user"><?= h($thread->actor_id) ?></span></div>
-                            <p class="answerText"><?= h($comment->body) ?></p>
-                        </div><!-- boxInner -->
-                    </div><!-- boxR -->
-                <?php } else {?>
-                    <div class="boxL">
-                        <div class="boxInner">
-                          <div class="updateList upWrap up_c_b">更新日時:<span class="time"><?= h($thread->updated_at) ?></span><span class="user"><?= h($thread->actor_id) ?></span></div>
-                            <p class="answerText"><?= h($comment->body) ?></p>
-                        </div><!-- boxInner -->
-                    </div><!-- boxL -->
-                <?php } ?>
-            <?php endforeach; ?>
-            <div class="al_R">
-              <a href="/oauth/login" class="btn cg_o">Sign up</a><a href="/" target="_blank" class="btn cg_g">Sign in</a>
-          </div><!-- al_R -->
-          </section><!-- section -->
-            </div><!-- left -->
-            <div id="right">
-               <section>
-    				<h2>最近のタグ</h2>
-                    <ul id="tagList">
-                    	<li><a href="yet.html" class="tagIcon">html</a><span class="tagNum">9</span></li>
-                    	<li><a href="yet.html" class="tagIcon">css</a><span class="tagNum">99</span></li>
-                        <li><a href="yet.html" class="tagIcon">php</a><span class="tagNum">999</span></li>
-                        <li><a href="yet.html" class="tagIcon">java</a><span class="tagNum">9999</span></li>
-                        <li><a href="yet.html" class="tagIcon">javascript</a><span class="tagNum">9</span></li>
-                    	<li><a href="yet.html" class="tagIcon">javascript</a><span class="tagNum">99</span></li>
-                        <li><a href="yet.html" class="tagIcon">javascript</a><span class="tagNum">999</span></li>
-                        <li><a href="yet.html" class="tagIcon">javascript</a><span class="tagNum">9999</span></li>
-                        <li><a href="yet.html" class="tagIcon">javascript</a><span class="tagNum">9</span></li>
-                    	<li><a href="yet.html" class="tagIcon">javascript</a><span class="tagNum">99</span></li>
-                        <li><a href="yet.html" class="tagIcon">javascript</a><span class="tagNum">999</span></li>
-                        <li><a href="yet.html" class="tagIcon">javascript</a><span class="tagNum">9999</span></li>
-                        <li><a href="yet.html" class="tagIcon">javascript</a><span class="tagNum">9</span></li>
-                    	<li><a href="yet.html" class="tagIcon">javascript</a><span class="tagNum">99</span></li>
-                    </ul>
-               </section>
-            </div><!-- right -->
-            </div><!-- inner -->
+ <div class="comments index large-10 medium-9 columns">
+    <h3>Comment</h3>
+    <?php
+      if(!empty($current_user)) {
+        echo $this->Form->create($comment, array(
+            'url' => array('controller' => 'comments', 'action'=>'add')));
+        echo $this->Form->input('body');
+        echo $this->Form->button(__('Submit'));
+        echo $this->Form->hidden('thread_id',array('value'=>$thread->id));
+        echo $this->Form->end();
+      }
+    ?>
+
+    <table cellpadding="0" cellspacing="0">
+    <tbody>
+    <?php foreach ($thread->comments as $comment): ?>
+        <tr>
+            <td><?= h($comment->body) ?></td>
+            <td><?= h($comment->created_at) ?></td>
+            <td class="actions">
+                <?= $this->Html->link(__('View'), ['controller' => 'Comments','action' => 'view', $comment->id]) ?>
+              <?php if(!empty($current_user)) { ?>
+                <?= $this->Html->link(__('Edit'), ['controller' => 'Comments','action' => 'edit', $comment->id]) ?>
+                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Comments','action' => 'delete', $comment->id], ['confirm' => __('Are you sure you want to delete # {0}?', $comment->id)]) ?>
+              <?php } ?>
+            </td>
+        </tr>
+
+    <?php endforeach; ?>
+    </tbody>
+    </table>
+</div>
+
+</div>

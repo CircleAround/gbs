@@ -1,65 +1,49 @@
-<div class="content">
-    <div class="inner">
-        <article>
-            <header>
-                <h2>答えを教えずに、ヒントだけで誘導するオンライントレーニング!</h2>
-            </header>
-        <div id="left">
-            <section>
-                <h2>質問内容</h2>
-                <?php foreach ($threads as $thread): ?>
-                    <div class="box">
-                        <h3 class="boxTitle">
-                            <a <?= $this->Html->link(__(h($thread->title) ), ['action' => 'view', $thread->id])  ?>                      <!--  <?= $this->Html->link(__('h($thread->title) '), ['action' => 'view', $thread->id]) ?>-->
-                            </a>
-                        </h3>
-                        <ul class="niceWrap listPos">
-                            <li><span class="nice c_b">いい質問</span><span class="balloon">12</span></li>
-                            <li><span class="nice c_o">いいアドバイス</span><span class="balloon">12</span></li>
-                            <li><span class="nice c_g">閲覧数</span><span class="balloon">12</span></li>
-                        </ul>
-                        <div class="updateList posB">更新日時:<span class="time"><?= h($thread->updated_at) ?></span><span class="user"><?= h($thread->actor_id) ?></span></div>
-                    </div><!-- box -->
-                <?php endforeach; ?>
+<div class="actions columns large-2 medium-3">
+    <h3><?= __('Actions') ?></h3>
+    <ul class="side-nav">
+      <?php if(!empty($current_user)) { ?>
+        <li><?= $this->Html->link(__('New Thread'), ['action' => 'add']) ?></li>
+      <?php } ?>
+    </ul>
+</div>
+<div class="threads index large-10 medium-9 columns">
+    <table cellpadding="0" cellspacing="0">
+    <thead>
+        <tr>
+            <th><?= $this->Paginator->sort('id') ?></th>
+            <th><?= $this->Paginator->sort('actor_id') ?></th>
+            <th><?= $this->Paginator->sort('title') ?></th>
+            <th><?= $this->Paginator->sort('created_at') ?></th>
+            <th><?= $this->Paginator->sort('updated_at') ?></th>
+            <th class="actions"><?= __('Actions') ?></th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($threads as $thread): ?>
+        <tr>
+            <td><?= $this->Number->format($thread->id) ?></td>
+            <td><?= $this->Number->format($thread->actor_id) ?></td>
+            <td><?= h($thread->title) ?></td>
+            <td><?= h($thread->created_at) ?></td>
+            <td><?= h($thread->updated_at) ?></td>
+            <td class="actions">
+                <?= $this->Html->link(__('View'), ['action' => 'view', $thread->id]) ?>
+                <?php if(!empty($current_user)) { ?>
+                  <?= $this->Html->link(__('Edit'), ['action' => 'edit', $thread->id]) ?>
+                  <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $thread->id], ['confirm' => __('Are you sure you want to delete # {0}?', $thread->id)]) ?>
+                <?php } ?>
+            </td>
+        </tr>
 
-                <div class="pagination">
-                    <div class="left">
-                        <?= $this->Paginator->prev('< ' . __('prev')) ?>
-                        <?= $this->Paginator->numbers() ?>
-                        <?= $this->Paginator->next(__('next') . ' >') ?>
-                    </div><!-- left -->
-                    <div class="right">
-                        <span class="page active">10</span>
-                        <a href="#" class="page">30</a>
-                        <a href="#" class="page">50</a>
-                        <span>件/ページ</span>
-                    </div><!-- right -->
-                </div><!-- pagination -->
-
-            </section>
-        </div><!-- left -->
-
-        <div id="right">
-            <section>
-                <h2>最近のタグ</h2>
-                      <ul id="tagList">
-                          <li><a href="yet.html" class="tagIcon">html</a><span class="tagNum">9</span></li>
-                      	  <li><a href="yet.html" class="tagIcon">css</a><span class="tagNum">99</span></li>
-                          <li><a href="yet.html" class="tagIcon">php</a><span class="tagNum">999</span></li>
-                          <li><a href="yet.html" class="tagIcon">java</a><span class="tagNum">9999</span></li>
-                          <li><a href="yet.html" class="tagIcon">javascript</a><span class="tagNum">9</span></li>
-                  	      <li><a href="yet.html" class="tagIcon">javascript</a><span class="tagNum">99</span></li>
-                          <li><a href="yet.html" class="tagIcon">javascript</a><span class="tagNum">999</span></li>
-                          <li><a href="yet.html" class="tagIcon">javascript</a><span class="tagNum">9999</span></li>
-                          <li><a href="yet.html" class="tagIcon">javascript</a><span class="tagNum">9</span></li>
-                  	      <li><a href="yet.html" class="tagIcon">javascript</a><span class="tagNum">99</span></li>
-                          <li><a href="yet.html" class="tagIcon">javascript</a><span class="tagNum">999</span></li>
-                          <li><a href="yet.html" class="tagIcon">javascript</a><span class="tagNum">9999</span></li>
-                          <li><a href="yet.html" class="tagIcon">javascript</a><span class="tagNum">9</span></li>
-                  	      <li><a href="yet.html" class="tagIcon">javascript</a><span class="tagNum">99</span></li>
-                    </ul>
-             </section>
-        </div><!-- right -->
-        </article>
-      </div><!-- inner -->
-</div><!-- content -->
+    <?php endforeach; ?>
+    </tbody>
+    </table>
+    <div class="paginator">
+        <ul class="pagination">
+            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->numbers() ?>
+            <?= $this->Paginator->next(__('next') . ' >') ?>
+        </ul>
+        <p><?= $this->Paginator->counter() ?></p>
+    </div>
+</div>
