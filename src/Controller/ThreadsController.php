@@ -26,6 +26,7 @@ class ThreadsController extends AppController
     public function index()
     {
         $this->paginate = [
+          'order'=>['Threads.created_at'=>'desc']
             //'contain' => ['Actors'] // あとで必要になるはず
         ];
         $this->set('threads', $this->paginate($this->Threads));
