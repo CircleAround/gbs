@@ -26,6 +26,8 @@
                         <div class="boxInner">
                           <div class="updateList upWrap up_c_y">更新日時:<span class="time"><?= h($thread->updated_at) ?></span><span class="user"><?= h($thread->actor_id) ?></span></div>
                             <p class="answerText"><?= h($comment->body) ?></p>
+                            <?= $this->Html->link(__('Edit'), ['controller' => 'Comments','action' => 'edit', $comment->id]) ?>
+                            <?= $this->Form->postLink(__('Delete'), ['controller' => 'Comments','action' => 'delete', $comment->id], ['confirm' => __('Are you sure you want to delete # {0}?', $comment->id)]) ?>
                         </div><!-- boxInner -->
                     </div><!-- boxR -->
                 <?php } else {?>
@@ -37,9 +39,20 @@
                     </div><!-- boxL -->
                 <?php } ?>
             <?php endforeach; ?>
-            <div class="al_R">
-              <a href="/oauth/login" class="btn cg_o">Sign up</a><a href="/" target="_blank" class="btn cg_g">Sign in</a>
-          </div><!-- al_R -->
+            <?php
+              if(!empty($current_user)) {
+                echo $this->Form->create($comment, array(
+                    'url' => array('controller' => 'comments', 'action'=>'add')));
+                echo $this->Form->input('body');
+                echo $this->Form->button(__('Submit'));
+                echo $this->Form->hidden('thread_id',array('value'=>$thread->id));
+                echo $this->Form->end();
+            ?>
+            <?php } else {?>
+              <div class="al_R">
+                <a href="/account/signup" class="btn cg_o">Sign up</a><a href="/oauth/login" target="_blank" class="btn cg_g">Sign in</a>
+              </div><!-- al_R -->
+            <?php } ?>
           </section><!-- section -->
             </div><!-- left -->
             <div id="right">
