@@ -53,7 +53,7 @@ class ThreadsController extends AppController
 
         $comment = $this->Threads->Comments->newEntity();
 
-        $this->set('comment', $comment);
+        $this->set('add_comment', $comment);
 
     }
 

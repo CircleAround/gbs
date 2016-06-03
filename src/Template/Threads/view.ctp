@@ -41,7 +41,7 @@
             <?php endforeach; ?>
             <?php
               if(!empty($current_user)) {
-                echo $this->Form->create($comment, array(
+                echo $this->Form->create($add_comment, array(
                     'url' => array('controller' => 'comments', 'action'=>'add')));
                 echo $this->Form->input('body');
                 echo $this->Form->button(__('Submit'));
