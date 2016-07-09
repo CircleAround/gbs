@@ -24,7 +24,7 @@
                   <?php if (!empty($current_user) && $comment->actor_id == $user['id']) { ?>
                     <div class="boxR">
                         <div class="boxInner">
-                          <div class="updateList upWrap up_c_y">更新日時:<span class="time"><?= h($thread->updated_at) ?></span><span class="user"><?= h($thread->actor_id) ?></span></div>
+                          <div class="updateList upWrap up_c_y">更新日時:<span class="time"><?= h($comment->updated_at) ?></span><span class="user"><?= h($thread->actor_id) ?></span></div>
                             <p class="answerText"><?= h($comment->body) ?></p>
                             <?= $this->Html->link(__('Edit'), ['controller' => 'Comments','action' => 'edit', $comment->id]) ?>
                             <?= $this->Form->postLink(__('Delete'), ['controller' => 'Comments','action' => 'delete', $comment->id], ['confirm' => __('Are you sure you want to delete # {0}?', $comment->id)]) ?>
@@ -33,7 +33,7 @@
                 <?php } else {?>
                     <div class="boxL">
                         <div class="boxInner">
-                          <div class="updateList upWrap up_c_b">更新日時:<span class="time"><?= h($thread->updated_at) ?></span><span class="user"><?= h($thread->actor_id) ?></span></div>
+                          <div class="updateList upWrap up_c_b">更新日時:<span class="time"><?= h($comment->updated_at) ?></span><span class="user"><?= h($thread->actor_id) ?></span></div>
                             <p class="answerText"><?= h($comment->body) ?></p>
                         </div><!-- boxInner -->
                     </div><!-- boxL -->
