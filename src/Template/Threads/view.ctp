@@ -39,15 +39,22 @@
                     </div><!-- boxL -->
                 <?php } ?>
             <?php endforeach; ?>
-            <?php
-              if(!empty($current_user)) {
-                echo $this->Form->create($add_comment, array(
-                    'url' => array('controller' => 'comments', 'action'=>'add')));
-                echo $this->Form->input('body');
-                echo $this->Form->button(__('Submit'));
-                echo $this->Form->hidden('thread_id',array('value'=>$thread->id));
-                echo $this->Form->end();
-            ?>
+            <?php if(!empty($current_user)) { ?>
+                <div class="arrowGotBtnWrap">
+                  <div class="arrowGotBtn">
+                    <p class="sabText">わかった！</span>
+                    <p class="mainText">ありがとう</span>
+                  </div>
+                </div>
+                <div class="al_R">
+                  <?php echo $this->Form->create($add_comment, array(
+                    'url' => array('controller' => 'comments', 'action'=>'add'))); ?>
+                  <?php echo $this->Form->input('body',['label'=>false,'type'=>'textarea','cols'=>'92','rows'=>'15']); ?>
+                  <?php echo $this->Html->link(__('質問を投稿する'),['action'=>'add'],['class'=>'btn cg_b']); ?>
+                  <?php echo $this->Form->button(__('アドバイスを投稿'), ['class'=>'btn cg_o']); ?>
+                  <?php echo $this->Form->hidden('thread_id',array('value'=>$thread->id)); ?>
+                  <?php echo $this->Form->end(); ?>
+                </div><!-- al_R -->
             <?php } else {?>
               <div class="al_R">
                 <a href="/account/signup" class="btn cg_o">Sign up</a><a href="/oauth/login" target="_blank" class="btn cg_g">Sign in</a>
