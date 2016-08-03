@@ -1,4 +1,5 @@
 <?php if(!empty($current_user)) {$user = $current_user->toArray();} ?>
+<?php $jibunFlag=false; $commnetAriFlag=false; ?>
 
     <div class="inner">
     <div id="left">
@@ -6,6 +7,7 @@
             <h2>質問内容</h2>
                 <div class="qTitleArea qTitlePos">
                     <h3 class="qTitle"><?= h($thread->title) ?>
+                    <?php if ($thread->actor_id == $user['id']) {$jibunFlag=true;} ?>
                     <ul class="niceWrap answerPos">
                         <li><span class="nice c_b">いい質問</span><span class="balloon">12</span></li>
                         <li><span class="nice c_o">いいアドバイス</span><span class="balloon">12</span></li>
@@ -36,10 +38,11 @@
                           <div class="updateList upWrap up_c_b">更新日時:<span class="time"><?= h($thread->updated_at) ?></span><span class="user"><?= h($thread->actor_id) ?></span></div>
                             <p class="answerText"><?= h($comment->body) ?></p>
                         </div><!-- boxInner -->
+                        <?php $commnetAriFlag=true; ?>
                     </div><!-- boxL -->
                 <?php } ?>
             <?php endforeach; ?>
-            <?php if(!empty($current_user)) { ?>
+            <?php if($jibunFlag && $commnetAriFlag) { ?>
                 <div class="arrowGotBtnWrap">
                   <div class="arrowGotBtn">
                     <p class="sabText">わかった！</span>
