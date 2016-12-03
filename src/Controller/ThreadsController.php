@@ -46,7 +46,9 @@ class ThreadsController extends AppController
             // 'contain' => ['Actors']
 //        ]);
         $thread = $this->Threads->find('all')
-            ->contain(['Comments'])->where(['id'=>$id])->first();
+            ->contain(['Comments' => ['Actors']])
+            ->where(['id'=>$id])
+            ->first();
 
         $this->set('thread', $thread);
         $this->set('_serialize', ['thread']);
