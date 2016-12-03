@@ -59,7 +59,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             </nav>
             <div id="boutton">
                 <?php if(!empty($current_user)) { ?>
-                <a href="/" class="btn cg_g">Sign out</a>
+                <a href="/oauth/logoutAndRedirect" class="btn cg_g">Sign out</a>
                 <?php } else { ?>
                   <a href="/account/signup" class="btn cg_o">Sign up</a><a href="/oauth/login" target="_blank" class="btn cg_g">Sign in</a>
                 <?php } ?>

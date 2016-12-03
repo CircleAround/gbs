@@ -123,4 +123,13 @@ class OauthController extends AppController
         $usersTable->save($new_user);
         $this->loginAndRedirect($new_user);
     }
+
+    public function logoutAndRedirect()
+    {
+        if ($this->isLoggedIn()) {
+            $this->request->session()->destroy();
+        }
+        $this->redirect('/');
+        $this->Flash->success(__('ログアウトしました'));
+    }
 }
