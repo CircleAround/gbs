@@ -21,7 +21,7 @@
 
             <h2 class="c_orange">回答</h2>
             <?php foreach ($thread->comments as $comment): ?>
-                  <?php if (!empty($current_user) && $comment->actor_id == $user['id']) { ?>
+                  <?php if (!empty($current_user) && $comment->actor_id == $thread->actor_id) { ?>
                     <div class="boxR">
                         <div class="boxInner">
                           <div class="updateList upWrap up_c_y">更新日時:<span class="time"><?= h($comment->updated_at) ?></span><span class="user"><?= h($comment->actor['name']) ?></span></div>
