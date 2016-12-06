@@ -18,7 +18,7 @@
                             <li><span class="nice c_o">いいアドバイス</span><span class="balloon">12</span></li>
                             <li><span class="nice c_g">閲覧数</span><span class="balloon">12</span></li>
                         </ul>
-                        <div class="updateList posB">更新日時:<span class="time"><?= h($thread->updated_at) ?></span><span class="user"><?= h($thread->actor_id) ?></span></div>
+                        <div class="updateList posB">更新日時:<span class="time"><?= h($thread->updated_at) ?></span><span class="user"><?= h($thread->actor->name) ?></span></div>
                     </div><!-- box -->
                 <?php endforeach; ?>
 
